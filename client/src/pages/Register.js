@@ -9,7 +9,9 @@ const Register = () => {
     lastName: "",
     emailAddress: "",
     password: "",
+    acceptTermsConditions: false,
   })
+
 
   const onlyLettersCheck = (stringValue) => {
     return /^[a-zA-Z]+$/.test(stringValue)
@@ -28,13 +30,15 @@ const Register = () => {
       setRegError("Last name must be valid (only letters)")
     } else if (!regFormData.emailAddress) {
       setRegError("Email address is required")
-    } else if (!regFormData.emailAddress.includes("@") || 
-        !regFormData.emailAddress.includes(".")) {
+    } else if (!regFormData.emailAddress.includes("@") ||
+      !regFormData.emailAddress.includes(".")) {
       setRegError("Email address is must be valid")
     } else if (!regFormData.password) {
       setRegError("Password is required")
     } else if (!regFormData.password) {
-      setRegError("Password is required") 
+      setRegError("Password is required")
+    } else if (!regFormData.acceptTermsConditions) {
+      setRegError("You must accept our Terms & Conditions to create an account")
     } else {
       console.log("API request made")
     }
@@ -48,6 +52,14 @@ const Register = () => {
     <div className="center">
       <form className="registration-form">
         <h3>Register New Account</h3>
+        <label>Title
+          <select name="" id="">
+            <option value={regFormData.title} name="title" onChange={handleChange}>Ms</option>
+            <option value={regFormData.title} name="title" onChange={handleChange}>Mr</option>
+            <option value="mrs">Mrs</option>
+            <option value="miss">Miss</option>
+          </select>
+        </label>
         <label>First Name
           <input
             value={regFormData.firstName}
@@ -55,9 +67,9 @@ const Register = () => {
             required
             type="text"
             name="firstName"
-            placeholder="" 
+            placeholder=""
 
-            />
+          />
         </label>
         <label> Last Name
           <input
@@ -66,8 +78,8 @@ const Register = () => {
             required
             type="text"
             name="lastName"
-            placeholder="" 
-            />
+            placeholder=""
+          />
         </label>
         <label> Email Address
           <input
@@ -75,8 +87,8 @@ const Register = () => {
             onChange={handleChange}
             required
             type="email"
-            name="emailAddress" 
-            />
+            name="emailAddress"
+          />
         </label>
         <label> Password
           <input
@@ -84,8 +96,14 @@ const Register = () => {
             onChange={handleChange}
             required
             type="password"
-            name="password" 
-            />
+            name="password"
+          />
+        </label>
+        <label>
+          <input type="checkbox" onClick={() => setRegFormData((oldValue) => {
+            return { ...oldValue, "acceptTermsConditions":!regFormData.acceptTermsConditions }
+          })} />
+          I accept Factored's Terms & Conditions and Privacy Policy
         </label>
         {regError}
         <button onClick={handleRegisterFormSubmit}>Create Account</button>
