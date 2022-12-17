@@ -3,8 +3,9 @@ import { useState } from 'react'
 const Register = () => {
 
   const [regError, setRegError] = useState("")
+  const [passwordShow, setPasswordShow] = useState(false)
   const [regFormData, setRegFormData] = useState({
-    title: "",
+    title: "Please select",
     firstName: "",
     lastName: "",
     emailAddress: "",
@@ -12,6 +13,7 @@ const Register = () => {
     acceptTermsConditions: false,
   })
 
+  const titleOptions = ["Please select", "Ms", "Mr", "Mrs", "Miss"]
 
   const onlyLettersCheck = (stringValue) => {
     return /^[a-zA-Z]+$/.test(stringValue)
@@ -20,7 +22,9 @@ const Register = () => {
   const handleRegisterFormSubmit = (e) => {
     e.preventDefault()
     setRegError("")
-    if (!regFormData.firstName) {
+    if (regFormData.title == "Please select") {
+      setRegError("Please select a valid title")
+    } else if (!regFormData.firstName) {
       setRegError("First name is required")
     } else if (!onlyLettersCheck(regFormData.firstName)) {
       setRegError("First name must be valid (only letters)")
@@ -35,8 +39,12 @@ const Register = () => {
       setRegError("Email address is must be valid")
     } else if (!regFormData.password) {
       setRegError("Password is required")
-    } else if (!regFormData.password) {
-      setRegError("Password is required")
+    } else if (regFormData.password.length < 8) {
+      setRegError("Password needs to be at least 8 characters long")
+    } else if (regFormData.password === regFormData.password.toLowerCase()) {
+      setRegError("Password need to have at least one upper case letter")
+    } else if (!/\d/g.test(regFormData.password)){
+      setRegError("Password needs to have at least one number")
     } else if (!regFormData.acceptTermsConditions) {
       setRegError("You must accept our Terms & Conditions to create an account")
     } else {
@@ -49,15 +57,14 @@ const Register = () => {
   }
 
   return (
-    <div className="center">
-      <form className="registration-form">
+    <div className="reg-form-div">
+      <form className="reg-form-container">
         <h3>Register New Account</h3>
         <label>Title
-          <select name="" id="">
-            <option value={regFormData.title} name="title" onChange={handleChange}>Ms</option>
-            <option value={regFormData.title} name="title" onChange={handleChange}>Mr</option>
-            <option value="mrs">Mrs</option>
-            <option value="miss">Miss</option>
+          <select name="title" onChange={handleChange}>
+            {titleOptions.map((title, index) => {
+              return <option key={index}>{title}</option>
+            })}
           </select>
         </label>
         <label>First Name
@@ -95,13 +102,14 @@ const Register = () => {
             value={regFormData.password}
             onChange={handleChange}
             required
-            type="password"
+            type={passwordShow ? "text" : "password"}
             name="password"
           />
+          <p style={{textDecoration: "underline"}} onClick={() => setPasswordShow(!passwordShow)}>{passwordShow ? "hide password" : "show password"}</p>
         </label>
         <label>
           <input type="checkbox" onClick={() => setRegFormData((oldValue) => {
-            return { ...oldValue, "acceptTermsConditions":!regFormData.acceptTermsConditions }
+            return { ...oldValue, "acceptTermsConditions": !regFormData.acceptTermsConditions }
           })} />
           I accept Factored's Terms & Conditions and Privacy Policy
         </label>
