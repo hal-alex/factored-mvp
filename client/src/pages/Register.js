@@ -1,9 +1,11 @@
 import { useState } from 'react'
+import { useGlobalContext } from '../context'
 
 const Register = () => {
 
+  const { passwordShow, setPasswordShow } = useGlobalContext()
+
   const [regError, setRegError] = useState("")
-  const [passwordShow, setPasswordShow] = useState(false)
   const [regFormData, setRegFormData] = useState({
     title: "Please select",
     firstName: "",
@@ -43,7 +45,7 @@ const Register = () => {
       setRegError("Password needs to be at least 8 characters long")
     } else if (regFormData.password === regFormData.password.toLowerCase()) {
       setRegError("Password need to have at least one upper case letter")
-    } else if (!/\d/g.test(regFormData.password)){
+    } else if (!/\d/g.test(regFormData.password)) {
       setRegError("Password needs to have at least one number")
     } else if (!regFormData.acceptTermsConditions) {
       setRegError("You must accept our Terms & Conditions to create an account")
@@ -57,8 +59,8 @@ const Register = () => {
   }
 
   return (
-    <div className="reg-form-div">
-      <form className="reg-form-container">
+    <div className="form-div">
+      <form className="form-container">
         <h3>Register New Account</h3>
         <label>Title
           <select name="title" onChange={handleChange}>
@@ -105,11 +107,16 @@ const Register = () => {
             type={passwordShow ? "text" : "password"}
             name="password"
           />
-          <p style={{textDecoration: "underline"}} onClick={() => setPasswordShow(!passwordShow)}>{passwordShow ? "hide password" : "show password"}</p>
+          <p style={{ textDecoration: "underline" }}
+            onClick={() => setPasswordShow(!passwordShow)}>
+            {passwordShow ? "hide password" : "show password"}</p>
         </label>
         <label>
           <input type="checkbox" onClick={() => setRegFormData((oldValue) => {
-            return { ...oldValue, "acceptTermsConditions": !regFormData.acceptTermsConditions }
+            return {
+              ...oldValue, "acceptTermsConditions":
+                !regFormData.acceptTermsConditions
+            }
           })} />
           I accept Factored's Terms & Conditions and Privacy Policy
         </label>
