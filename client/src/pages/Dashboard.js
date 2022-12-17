@@ -50,7 +50,7 @@ const Dashboard = () => {
                 start_date, end_date, property_address } = advance
               return (
                 <tr key={id}>
-                  <td>{title}</td>
+                  <td><Link to={`/advances/${id}`}>{title}</Link></td>
                   <td>{ }</td>
                   <td>{start_date}</td>
                   <td>{end_date}</td>
