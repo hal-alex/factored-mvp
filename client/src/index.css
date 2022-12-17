@@ -28,3 +28,27 @@ code {
   flex-direction: column;
   justify-content: space-between;
 }
+
+.nav-bar-links {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.dashboard-div {
+  margin: 5%;
+  display: flex;
+  flex-direction: column;
+}
+
+.create-advance-button {
+  margin-left: 500px;
+}
+
+.dashboard-table-headings {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* .table-heading {
+  width: 75px;
+} */
