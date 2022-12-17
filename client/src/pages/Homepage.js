@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const Homepage = () => {
     return (
-        <div>
+        <div className='center'>
             <div>Welcome to Factored</div>
             <Link to="/register"><button>Register</button></Link>
             <Link to="/login"><button>Log In</button></Link>

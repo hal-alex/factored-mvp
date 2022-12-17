@@ -19,11 +19,11 @@ code {
   padding: 10px;
 }
 
-.reg-form-div {
+.form-div {
   margin: 5%;
 }
 
-.reg-form-container {
+.form-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
