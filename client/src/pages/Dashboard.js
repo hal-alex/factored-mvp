@@ -1,8 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import data from "../data"
+import { useGlobalContext } from '../context'
 
 const Dashboard = () => {
+
+  const { userProfileTestData, } = useGlobalContext()
+
+  const KYC = userProfileTestData.ifVerified
+  const phoneNumber = userProfileTestData.contactNumber
 
   const dashboardHeadings = ["Name", "Address", "Start Date",
     "End Date", "Advance Amount", "Status", "Last Payment"]
@@ -14,8 +20,10 @@ const Dashboard = () => {
         <h4>Complete these steps to create your first advance</h4>
         <div>
           <p>1. Go through identity verification.</p>
+          {KYC && <p>Completed</p>}
           <Link to="/identityverification">
-            <button>Start Identity Verification</button>
+            <button disabled={KYC ? true : false}>
+              Start Identity Verification</button>
           </Link>
         </div>
         <p>2. Add your address history for the last 3 years</p>
@@ -24,8 +32,9 @@ const Dashboard = () => {
         </Link>
         <div>
           <p>3. Add your contact number</p>
+          <p>{phoneNumber ? "Completed" : ""}</p>
           <Link to="/profile">
-            <button>Add Contact Number</button>
+            <button disabled={phoneNumber ? true : false}>Add Contact Number</button>
           </Link>
         </div>
       </div>

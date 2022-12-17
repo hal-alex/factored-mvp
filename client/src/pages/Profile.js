@@ -1,17 +1,10 @@
 import React, { useState } from 'react'
+import { useGlobalContext } from '../context'
 
 const ProfilePage = () => {
 
+  const { userProfileTestData, setUserProfileTestData } = useGlobalContext()
   const [showForm, setShowForm] = useState(false)
-  const [userProfileTestData, setUserProfileTestData] = useState({
-    id: "1",
-    title: "Mr",
-    firstName: "Alex",
-    lastName: "Ha",
-    emailAddress: "testing@gmail.com",
-    contactNumber: "",
-  })
-
   const [newNumber, setNewNumber] = useState("")
 
   const handleProfileFormChange = (e) => {
@@ -32,6 +25,9 @@ const ProfilePage = () => {
         <p>First name: {userProfileTestData.firstName}</p>
         <p>Last name: {userProfileTestData.lastName}</p>
         <p>Email addres: {userProfileTestData.emailAddress}</p>
+        <p>Verification status:
+          {userProfileTestData.ifVerified ?
+            "Verified" : "Unverified"}</p>
         <p>Contact number:
           {userProfileTestData.contactNumber ?
             userProfileTestData.contactNumber :
