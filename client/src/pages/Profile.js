@@ -25,10 +25,13 @@ const ProfilePage = () => {
         <p>First name: {userProfileTestData.firstName}</p>
         <p>Last name: {userProfileTestData.lastName}</p>
         <p>Email addres: {userProfileTestData.emailAddress}</p>
-        <p>Verification status:
+        <p>Verification status: 
           {userProfileTestData.ifVerified ?
             "Verified" : "Unverified"}</p>
-        <p>Contact number:
+        <p>Address history: 
+          {userProfileTestData.hasAddressHistory ?
+            "Submitted" : "Incomplete"}</p>
+        <p>Contact number: 
           {userProfileTestData.contactNumber ?
             userProfileTestData.contactNumber :
             <button onClick={() =>

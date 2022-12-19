@@ -9,6 +9,7 @@ const Dashboard = () => {
 
   const KYC = userProfileTestData.ifVerified
   const phoneNumber = userProfileTestData.contactNumber
+  const addressHistoryStatus = userProfileTestData.hasAddressHistory
 
   const dashboardHeadings = ["Name", "Address", "Start Date",
     "End Date", "Advance Amount", "Status", "Last Payment"]
@@ -27,8 +28,9 @@ const Dashboard = () => {
           </Link>
         </div>
         <p>2. Add your address history for the last 3 years</p>
+        <p>{addressHistoryStatus ? "Completed" : ""}</p>
         <Link to="/addresshistory">
-          <button>Add Address History</button>
+          <button disabled={addressHistoryStatus ? true : false}>Add Address History</button>
         </Link>
         <div>
           <p>3. Add your contact number</p>
@@ -40,7 +42,8 @@ const Dashboard = () => {
       </div>
       <div className='create-advance-button'>
         <Link to="/createadvance">
-          <button>Create Advance</button>
+          <button disabled={KYC && addressHistoryStatus
+            && phoneNumber ? false : true }>Create Advance</button>
         </Link>
       </div>
       <div>

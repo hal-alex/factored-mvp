@@ -1,8 +1,11 @@
 import React from 'react'
 import Persona from 'persona'
 import { useEffect } from 'react'
+import { useGlobalContext } from '../context'
 
 const IDVerification = () => {
+
+    const { userProfileTestData, setUserProfileTestData } = useGlobalContext()
 
     // const client = new Persona.Client({
     //     templateId: "itmpl_Ygs16MKTkA6obnF8C3Rb17dm",
@@ -25,6 +28,11 @@ const IDVerification = () => {
             <h3>ID Verification</h3>
             <div></div>
             <button onClick={() => startVerification}> Start verification</button>
+            <button onClick={() =>
+                setUserProfileTestData({
+                    ...userProfileTestData,
+                    "ifVerified": true
+                })}>Click to change KYC status</button>
         </div>
     )
 }

@@ -14,6 +14,7 @@ const AppProvider = ({ children }) => {
         lastName: "Ha",
         emailAddress: "testing@gmail.com",
         ifVerified: false,
+        hasAddressHistory: false,
         contactNumber: "",
     })
 
