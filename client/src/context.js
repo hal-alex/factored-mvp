@@ -18,6 +18,8 @@ const AppProvider = ({ children }) => {
         contactNumber: "",
     })
 
+    const [userAddressHistory, setUserAddressHistory] = useState([])
+
     return <AppContext.Provider
         value={{
             loading,
@@ -26,6 +28,8 @@ const AppProvider = ({ children }) => {
             setPasswordShow,
             userProfileTestData,
             setUserProfileTestData,
+            userAddressHistory,
+            setUserAddressHistory,
         }}
     >{children}</AppContext.Provider>
 }
