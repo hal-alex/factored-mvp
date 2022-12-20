@@ -5,6 +5,7 @@ const AppContext = React.createContext()
 const AppProvider = ({ children }) => {
 
     const [loading, setloading] = useState(true)
+
     const [passwordShow, setPasswordShow] = useState(false)
 
     const [userProfileTestData, setUserProfileTestData] = useState({
@@ -19,7 +20,34 @@ const AppProvider = ({ children }) => {
     })
 
     const [userAddressHistory, setUserAddressHistory] = useState([])
-    const [newAdvance, setNewAdvance] = useState({})
+
+    const [newAdvance, setNewAdvance] = useState({
+        stageOne: {
+            advanceName: "",
+            advanceDescription: "",
+            reasonForAdvance: "",
+            firstLine: "",
+            secondLine: "",
+            postcode: "",
+            townOrCity: "",
+            country: "",
+            monthlyRent: 0,
+        },
+        stageTwo: {
+            leaseAgreement: "",
+            rentProtection: "",
+            tenantVetting: "",
+        },
+        stageThree: {
+            amountRentSelling: 0,
+            advanceDuration: 0,
+        },
+        stageFour: {
+            bankAccountName: "",
+            bankAccountNumber: "",
+            bankAccountSortCode: "",
+        },
+    })
 
     return <AppContext.Provider
         value={{
