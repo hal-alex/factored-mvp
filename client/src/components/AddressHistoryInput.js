@@ -60,7 +60,6 @@ const AddressHistoryInput = () => {
 
         setDuration(addressHistoryDuration)
 
-
     }, [addressHistory])
 
     const addMoreAddressFields = () => {
@@ -81,7 +80,6 @@ const AddressHistoryInput = () => {
             setUserProfileTestData({ ...userProfileTestData, "hasAddressHistory": true })
             setUserAddressHistory(addressHistory)
         }
-
     }
 
     const removeAddress = (index) => {
@@ -163,7 +161,8 @@ const AddressHistoryInput = () => {
                                     />
                                 </label>
                                 {addressDurationHist ?
-                                    `You have spent ${addressDurationHist} months at this address`
+                                    `You have spent ${addressDurationHist} 
+                                    months at this address`
                                     : ""}
                                 <button onClick={removeAddress}>Remove Address</button>
                             </div>

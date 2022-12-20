@@ -33,6 +33,8 @@ const NewAdvance4 = () => {
                     <input type="number" name="" id="" />
                 </label>
                 <button onClick={handleSubmit}>Next stage</button>
+                <button onClick={() =>
+                    navigate("/new-advance-3")}>Previous stage</button>
             </form>
         </div>
     )
