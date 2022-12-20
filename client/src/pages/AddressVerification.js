@@ -6,38 +6,42 @@ const AddressVerification = () => {
 
   const { userProfileTestData, setUserProfileTestData } = useGlobalContext()
   const [duration, setDuration] = useState(0)
-  const [addressHistory, setAddressHistory] = useState([
-    {
-      firstLine: "",
-      secondLine: "",
-      postcode: "",
-      townOrCity: "",
-      country: "",
-      startDate: "",
-      endDate: "",
-    },
-  ])
+  const [addressHistory, setAddressHistory] = useState(
+    [
+      {
+        firstLine: "",
+        secondLine: "",
+        postcode: "",
+        townOrCity: "",
+        country: "",
+        startDate: "",
+        endDate: "",
+        addressDuration: 0,
+      },
+    ]
+  )
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    for (let index = 0; index < addressHistory.length; index++) {
-      const singleAddress = addressHistory[index];
-      const { endDate, startDate } = singleAddress
-      if (endDate && startDate) {
-        let endAddressYear = parseInt(endDate.split("-")[0])
-        let endAddressMonth = parseInt(endDate.split("-")[1])
-        let startAddressYear = parseInt(startDate.split("-")[0])
-        let startAddressMonth = parseInt(startDate.split("-")[1])
-        let differenceMonths = endAddressMonth - startAddressMonth +
-          12 * (endAddressYear - startAddressYear)
-        setDuration((oldValue) => oldValue + differenceMonths)
-      }
-    }
-    if (duration >= 36) {
-      console.log("address hit")
-      setUserProfileTestData({ ...userProfileTestData, "hasAddressHistory": true })
-    }
-  }, [addressHistory])
+  //   for (let index = 0; index < addressHistory.length; index++) {
+  //     const singleAddress = addressHistory[index]
+  //     const { endDate, startDate } = singleAddress
+  //     if (endDate && startDate) {
+  //       let endAddressYear = parseInt(endDate.split("-")[0])
+  //       let endAddressMonth = parseInt(endDate.split("-")[1])
+  //       let startAddressYear = parseInt(startDate.split("-")[0])
+  //       let startAddressMonth = parseInt(startDate.split("-")[1])
+  //       let differenceMonths = endAddressMonth - startAddressMonth +
+  //         12 * (endAddressYear - startAddressYear)
+
+  //       // setAddressHistory([{ ...singleAddress, "addressDuration": differenceMonths }])
+  //     }
+  //   }
+  //   if (duration >= 36) {
+  //     console.log("address hit")
+  //     setUserProfileTestData({ ...userProfileTestData, "hasAddressHistory": true })
+  //   }
+  // }, [addressHistory])
 
   const addMoreAddressFields = () => {
     let newAddress = {
@@ -60,6 +64,29 @@ const AddressVerification = () => {
 
   const submitForm = (e) => {
     e.preventDefault()
+    setDuration(0)
+    let totalMonths = 0
+
+    for (let index = 0; index < addressHistory.length; index++) {
+      const singleAddress = addressHistory[index]
+      const { endDate, startDate } = singleAddress
+      if (endDate && startDate) {
+        let endAddressYear = parseInt(endDate.split("-")[0])
+        let endAddressMonth = parseInt(endDate.split("-")[1])
+        let startAddressYear = parseInt(startDate.split("-")[0])
+        let startAddressMonth = parseInt(startDate.split("-")[1])
+        let differenceMonths = endAddressMonth - startAddressMonth +
+          12 * (endAddressYear - startAddressYear)
+        totalMonths += differenceMonths
+      }
+    }
+
+    setDuration(totalMonths)
+
+    if (duration >= 36) {
+      console.log("address hit")
+      setUserProfileTestData({ ...userProfileTestData, "hasAddressHistory": true })
+    }
     console.log(addressHistory)
   }
 
@@ -81,7 +108,7 @@ const AddressVerification = () => {
         <form className="form-container" onSubmit={submitForm}>
           {addressHistory.map((address, index) => {
             const { firstLine, secondLine, postcode,
-              townOrCity, country, startDate, endDate } = address
+              townOrCity, country, startDate, endDate, addressDuration } = address
             return (
               <div key={index}>
                 <input
@@ -137,7 +164,7 @@ const AddressVerification = () => {
                     required
                   />
                 </label>
-
+                {addressDuration ? "You have spent " : ""}
                 <button onClick={removeAddress}>Remove Address</button>
               </div>
             )
