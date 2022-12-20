@@ -41,7 +41,7 @@ const Dashboard = () => {
         </div>
       </div>
       <div className='create-advance-button'>
-        <Link to="/createadvance">
+        <Link to="/new-advance-1">
           <button disabled={KYC && addressHistoryStatus
             && phoneNumber ? false : true }>Create Advance</button>
         </Link>
