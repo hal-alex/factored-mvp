@@ -13,12 +13,13 @@ const AppProvider = ({ children }) => {
         firstName: "Alex",
         lastName: "Ha",
         emailAddress: "testing@gmail.com",
-        ifVerified: false,
-        hasAddressHistory: false,
-        contactNumber: "",
+        ifVerified: true,
+        hasAddressHistory: true,
+        contactNumber: 111,
     })
 
     const [userAddressHistory, setUserAddressHistory] = useState([])
+    const [newAdvance, setNewAdvance] = useState({})
 
     return <AppContext.Provider
         value={{
@@ -30,6 +31,8 @@ const AppProvider = ({ children }) => {
             setUserProfileTestData,
             userAddressHistory,
             setUserAddressHistory,
+            newAdvance,
+            setNewAdvance,
         }}
     >{children}</AppContext.Provider>
 }
