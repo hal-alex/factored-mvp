@@ -3,57 +3,63 @@ import { useState, useEffect } from 'react'
 import { useGlobalContext } from '../context'
 
 const AddressVerification = () => {
-
-  const { userProfileTestData, setUserProfileTestData } = useGlobalContext()
   const [duration, setDuration] = useState(0)
+  const addressTemplate = {
+    firstLine: "",
+    secondLine: "",
+    postcode: "",
+    townOrCity: "",
+    country: "",
+    startDate: "",
+    endDate: "",
+    addressDuration: 0,
+  }
+  const { userProfileTestData, setUserProfileTestData } = useGlobalContext()
+
   const [addressHistory, setAddressHistory] = useState(
-    [
-      {
-        firstLine: "",
-        secondLine: "",
-        postcode: "",
-        townOrCity: "",
-        country: "",
-        startDate: "",
-        endDate: "",
-        addressDuration: 0,
-      },
-    ]
+    [addressTemplate,]
   )
 
-  // useEffect(() => {
+  const calculateMonths = (endDate, startDate) => {
+    if (endDate && startDate) {
+      let endAddressYear = parseInt(endDate.split("-")[0])
+      // console.log(endAddressYear)
+      let endAddressMonth = parseInt(endDate.split("-")[1])
+      // console.log(endAddressMonth)
+      let startAddressYear = parseInt(startDate.split("-")[0])
+      // console.log(startAddressYear)
+      let startAddressMonth = parseInt(startDate.split("-")[1])
+      // console.log(startAddressMonth)
+      let differenceMonths = endAddressMonth - startAddressMonth +
+        12 * (endAddressYear - startAddressYear)
 
-  //   for (let index = 0; index < addressHistory.length; index++) {
-  //     const singleAddress = addressHistory[index]
-  //     const { endDate, startDate } = singleAddress
-  //     if (endDate && startDate) {
-  //       let endAddressYear = parseInt(endDate.split("-")[0])
-  //       let endAddressMonth = parseInt(endDate.split("-")[1])
-  //       let startAddressYear = parseInt(startDate.split("-")[0])
-  //       let startAddressMonth = parseInt(startDate.split("-")[1])
-  //       let differenceMonths = endAddressMonth - startAddressMonth +
-  //         12 * (endAddressYear - startAddressYear)
+      console.log(differenceMonths)
 
-  //       // setAddressHistory([{ ...singleAddress, "addressDuration": differenceMonths }])
-  //     }
-  //   }
-  //   if (duration >= 36) {
-  //     console.log("address hit")
-  //     setUserProfileTestData({ ...userProfileTestData, "hasAddressHistory": true })
-  //   }
-  // }, [addressHistory])
+      return differenceMonths
+    }
+
+    return 0
+  }
+
+  useEffect(() => {
+    let addressHistoryDuration = 0
+    for (let index = 0; index < addressHistory.length; index++) {
+      const singleAddress = addressHistory[index]
+      const { endDate, startDate } = singleAddress
+      let months = calculateMonths(endDate, startDate)
+      addressHistoryDuration += months
+    }
+
+    setDuration(addressHistoryDuration)
+    if (addressHistoryDuration >= 36) {
+      console.log("address hit")
+      setUserProfileTestData({ ...userProfileTestData, "hasAddressHistory": true })
+    }
+
+  }, [addressHistory])
 
   const addMoreAddressFields = () => {
-    let newAddress = {
-      firstLine: "",
-      secondLine: "",
-      postcode: "",
-      townOrCity: "",
-      country: "",
-      startDate: "",
-      endDate: "",
-    }
-    setAddressHistory([...addressHistory, newAddress])
+    setAddressHistory([...addressHistory, addressTemplate])
   }
 
   const handleChange = (index, e) => {
@@ -70,20 +76,13 @@ const AddressVerification = () => {
     for (let index = 0; index < addressHistory.length; index++) {
       const singleAddress = addressHistory[index]
       const { endDate, startDate } = singleAddress
-      if (endDate && startDate) {
-        let endAddressYear = parseInt(endDate.split("-")[0])
-        let endAddressMonth = parseInt(endDate.split("-")[1])
-        let startAddressYear = parseInt(startDate.split("-")[0])
-        let startAddressMonth = parseInt(startDate.split("-")[1])
-        let differenceMonths = endAddressMonth - startAddressMonth +
-          12 * (endAddressYear - startAddressYear)
-        totalMonths += differenceMonths
-      }
+      let months = calculateMonths(endDate, startDate)
+      totalMonths += months
     }
 
     setDuration(totalMonths)
 
-    if (duration >= 36) {
+    if (totalMonths >= 36) {
       console.log("address hit")
       setUserProfileTestData({ ...userProfileTestData, "hasAddressHistory": true })
     }
@@ -108,7 +107,11 @@ const AddressVerification = () => {
         <form className="form-container" onSubmit={submitForm}>
           {addressHistory.map((address, index) => {
             const { firstLine, secondLine, postcode,
-              townOrCity, country, startDate, endDate, addressDuration } = address
+              townOrCity, country, startDate, endDate } = address
+            let addressDurationHist = 0
+            if (endDate && startDate) {
+              addressDurationHist = calculateMonths(endDate, startDate)
+            }
             return (
               <div key={index}>
                 <input
@@ -164,12 +167,18 @@ const AddressVerification = () => {
                     required
                   />
                 </label>
-                {addressDuration ? "You have spent " : ""}
+                {addressDurationHist ?
+                  `You have spent ${addressDurationHist} months at this address`
+                  : ""}
                 <button onClick={removeAddress}>Remove Address</button>
               </div>
             )
           })}
-          <button onClick={submitForm}>Submit Address History</button>
+          <button
+            disabled={duration >= 36 ? false : true}
+            onClick={submitForm}>
+            Submit Address History
+          </button>
         </form>
       </div>
     </div>
