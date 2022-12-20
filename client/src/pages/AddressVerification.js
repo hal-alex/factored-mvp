@@ -19,14 +19,19 @@ const AddressVerification = () => {
   ])
 
   useEffect(() => {
-    if (addressHistory.endDate && addressHistory.startDate) {
-      let endAddressYear = parseInt(addressHistory.endDate.split("-")[0])
-      let endAddressMonth = parseInt(addressHistory.endDate.split("-")[1])
-      let startAddressYear = parseInt(addressHistory.startDate.split("-")[0])
-      let startAddressMonth = parseInt(addressHistory.startDate.split("-")[1])
-      let differenceMonths = endAddressMonth - startAddressMonth +
-        12 * (endAddressYear - startAddressYear)
-      setDuration(differenceMonths)
+
+    for (let index = 0; index < addressHistory.length; index++) {
+      const singleAddress = addressHistory[index];
+      const { endDate, startDate } = singleAddress
+      if (endDate && startDate) {
+        let endAddressYear = parseInt(endDate.split("-")[0])
+        let endAddressMonth = parseInt(endDate.split("-")[1])
+        let startAddressYear = parseInt(startDate.split("-")[0])
+        let startAddressMonth = parseInt(startDate.split("-")[1])
+        let differenceMonths = endAddressMonth - startAddressMonth +
+          12 * (endAddressYear - startAddressYear)
+        setDuration((oldValue) => oldValue + differenceMonths)
+      }
     }
     if (duration >= 36) {
       console.log("address hit")
@@ -55,7 +60,7 @@ const AddressVerification = () => {
 
   const submitForm = (e) => {
     e.preventDefault()
-
+    console.log(addressHistory)
   }
 
   const removeAddress = (index) => {
@@ -75,7 +80,8 @@ const AddressVerification = () => {
       <div>
         <form className="form-container" onSubmit={submitForm}>
           {addressHistory.map((address, index) => {
-            const { firstLine, startDate, endDate } = address
+            const { firstLine, secondLine, postcode,
+              townOrCity, country, startDate, endDate } = address
             return (
               <div key={index}>
                 <input
@@ -85,72 +91,59 @@ const AddressVerification = () => {
                   placeholder="First Address Line"
                   onChange={(e) => handleChange(index, e)}
                 />
+                <input
+                  type="text"
+                  name="secondLine"
+                  value={secondLine}
+                  placeholder="Second Address Line"
+                  onChange={(e) => handleChange(index, e)}
+                />
+                <input
+                  type="text"
+                  name="postcode"
+                  value={postcode}
+                  placeholder="Post code"
+                  onChange={(e) => handleChange(index, e)}
+                />
+                <input
+                  type="text"
+                  name="townOrCity"
+                  value={townOrCity}
+                  placeholder="Town/City"
+                  onChange={(e) => handleChange(index, e)}
+                />
+                <input
+                  type="text"
+                  name="country"
+                  value={country}
+                  placeholder="Country"
+                  onChange={(e) => handleChange(index, e)}
+                />
+                <label> Start Date
+                  <input
+                    type="month"
+                    name="startDate"
+                    value={startDate}
+                    onChange={(e) => handleChange(index, e)}
+                    required
+                  />
+                </label>
+                <label>End Date
+                  <input
+                    type="month"
+                    name="endDate"
+                    value={endDate}
+                    onChange={(e) => handleChange(index, e)}
+                    required
+                  />
+                </label>
+
                 <button onClick={removeAddress}>Remove Address</button>
               </div>
             )
           })}
           <button onClick={submitForm}>Submit Address History</button>
         </form>
-        {/* <form className="form-container">
-          <label> First Line Address
-            <input
-              name='firstLine'
-              placeholder='Name'
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label> Second Line Address
-            <input
-              name='secondLine'
-              placeholder='Name'
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label> Postcode
-            <input
-              name='postcode'
-              placeholder='Name'
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label> City / Town
-            <input
-              name='townOrCity'
-              placeholder='Name'
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label> Country
-            <input
-              name='country'
-              placeholder='Name'
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label> Start Date
-            <input
-              type="month"
-              name="startDate"
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>End Date
-            <input
-              type="month"
-              name="endDate"
-              onChange={handleChange}
-              required
-            />
-          </label>
-          {duration ? <p>You have spent {duration} months at this address</p> : ""}
-          <button>Confirm address</button>
-        </form> */}
       </div>
     </div>
   )
