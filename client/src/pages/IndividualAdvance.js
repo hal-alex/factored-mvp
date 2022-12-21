@@ -2,6 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import data from "../data"
 import { Link } from 'react-router-dom'
+
 const IndividualAdvance = () => {
 
     const { advanceID } = useParams()
@@ -18,7 +19,7 @@ const IndividualAdvance = () => {
             <p>Initial amount: £{amount_borrowed}</p>
             <p>Start data: {start_date}</p>
             <p>End date: {end_date}</p>
-            <Link to="/createadvance"><button>Create new Advance</button></Link>
+            <Link to="/new-advance-1"><button>Create new Advance</button></Link>
             <Link to="/dashboard"><button>Back to dashboard</button></Link>
         </div>
     )
