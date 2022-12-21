@@ -7,23 +7,47 @@ const NewAdvance3 = () => {
     const navigate = useNavigate()
     const { newAdvance, setNewAdvance } = useGlobalContext()
     const rates = [[12, 0.2499], [24, 0.2199],
-    [36, 0.1899], [48, 0.1599], [60, 0.1299]]
+    [36, 0.1899], [48, 0.1599], [60, 12.99]]
 
     const { stageOne: { monthlyRent },
         stageThree: { amountRentSelling,
             advanceDuration,
+            monthlyPayment,
+            yearlyInterestRate,
         } } = newAdvance
 
     const calculateMonthlyPayment = () => {
-        const durationMonths = rates[4][0]
-        const interestRate = rates[4][1]
-        const totalNumOfPayments = durationMonths * 12
-        const monthlyInterestRate = interestRate / 12
+        // Calculating the monthly payment for an Advance
+        // A = P (r (1+r)^n) / ( (1+r)^n -1 )
+        // A = Payment amount per period
+        // P = Initial principal or loan amount
+        // r = Interest rate per month
+        // n = Total number of payments or months
+        // let A = 0
+        // const P = amountRentSelling
+        // const r = rates[4][1] / 12
+        // const n = rates[4][0]
+        // A = P * (r * (1 + r) ^ n) / ((1 + r) ^ n - 1)
+        // console.log(A)
+        const principal = amountRentSelling
+        const interestRateMonthly = rates[4][1] / 100 / 12
+        const totalNumberOfPayments = rates[4][0]
+        const x = Math.pow(1 + interestRateMonthly, totalNumberOfPayments)
+        const monthlyPayment = ((principal * x * interestRateMonthly)
+            / (x - 1)).toFixed(2)
+        setNewAdvance({
+            ...newAdvance,
+            stageThree: {
+                ...newAdvance.stageThree,
+                monthlyPayment: monthlyPayment
+            }
+        })
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        navigate("/new-advance-4")
+        calculateMonthlyPayment()
+        // navigate("/new-advance-4")
     }
 
     const handleChange = (e) => {
@@ -63,7 +87,7 @@ const NewAdvance3 = () => {
                 </label>
                 <p>Between 12 months and 60 months</p>
                 <label>
-                    <p>Your monthly payments will be: £</p>
+                    <p>Your monthly payments will be: £{monthlyPayment}</p>
                 </label>
                 <button onClick={handleSubmit}>Next stage</button>
                 <button onClick={() =>
