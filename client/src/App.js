@@ -16,6 +16,7 @@ import NewAdvance2 from "./pages/NewAdvance2"
 import NewAdvance3 from "./pages/NewAdvance3"
 import NewAdvance4 from "./pages/NewAdvance4"
 import NewAdvanceConf from "./pages/NewAdvanceConf"
+import AdvanceCreateSuccess from "./pages/AdvanceCreateSuccess"
 
 function App() {
   return (
@@ -40,6 +41,8 @@ function App() {
         <Route path="/new-advance-4" element={<NewAdvance4></NewAdvance4>}></Route>
         <Route path="/new-advance-confirmation"
           element={<NewAdvanceConf></NewAdvanceConf>}></Route>
+        <Route path="/new-advance-success" element={<AdvanceCreateSuccess>
+        </AdvanceCreateSuccess>}></Route>
       </Routes>
     </BrowserRouter>
   )

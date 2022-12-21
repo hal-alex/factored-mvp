@@ -71,7 +71,7 @@ const NewAdvance3 = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        // navigate("/new-advance-4")
+        navigate("/new-advance-4")
     }
 
     const handleChange = (e) => {
