@@ -19,9 +19,7 @@ const AppProvider = ({ children }) => {
         contactNumber: 111,
     })
 
-    const [userAddressHistory, setUserAddressHistory] = useState([])
-
-    const [newAdvance, setNewAdvance] = useState({
+    const templateAdvance = {
         stageOne: {
             advanceName: "",
             advanceDescription: "",
@@ -49,7 +47,14 @@ const AppProvider = ({ children }) => {
             bankAccountNumber: "",
             bankAccountSortCode: "",
         },
-    })
+        conf: {
+            acceptTerms: false,
+        }
+    }
+
+    const [userAddressHistory, setUserAddressHistory] = useState([])
+
+    const [newAdvance, setNewAdvance] = useState(templateAdvance)
 
     return <AppContext.Provider
         value={{
@@ -63,6 +68,7 @@ const AppProvider = ({ children }) => {
             setUserAddressHistory,
             newAdvance,
             setNewAdvance,
+            templateAdvance,
         }}
     >{children}</AppContext.Provider>
 }
