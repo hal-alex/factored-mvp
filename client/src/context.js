@@ -31,7 +31,7 @@ const AppProvider = ({ children }) => {
             postcode: "",
             townOrCity: "",
             country: "",
-            monthlyRent: 1800,
+            monthlyRent: 0,
         },
         stageTwo: {
             leaseAgreement: "",
