@@ -1,13 +1,14 @@
 import React from 'react'
 import { useGlobalContext } from "../context"
 import { useNavigate } from "react-router-dom"
+import { useEffect } from 'react'
 
 const NewAdvance3 = () => {
 
     const navigate = useNavigate()
     const { newAdvance, setNewAdvance } = useGlobalContext()
-    const rates = [[12, 0.2499], [24, 0.2199],
-    [36, 0.1899], [48, 0.1599], [60, 12.99]]
+    const rates = [[12, 24.99], [24, 21.99],
+    [36, 18.99], [48, 15.99], [60, 12.99]]
 
     const { stageOne: { monthlyRent },
         stageThree: { amountRentSelling,
@@ -16,37 +17,60 @@ const NewAdvance3 = () => {
             yearlyInterestRate,
         } } = newAdvance
 
-    const calculateMonthlyPayment = () => {
-        // Calculating the monthly payment for an Advance
-        // A = P (r (1+r)^n) / ( (1+r)^n -1 )
-        // A = Payment amount per period
-        // P = Initial principal or loan amount
-        // r = Interest rate per month
-        // n = Total number of payments or months
-        // let A = 0
-        // const P = amountRentSelling
-        // const r = rates[4][1] / 12
-        // const n = rates[4][0]
-        // A = P * (r * (1 + r) ^ n) / ((1 + r) ^ n - 1)
-        // console.log(A)
-        const principal = amountRentSelling
-        const interestRateMonthly = rates[4][1] / 100 / 12
-        const totalNumberOfPayments = rates[4][0]
-        const x = Math.pow(1 + interestRateMonthly, totalNumberOfPayments)
-        const monthlyPayment = ((principal * x * interestRateMonthly)
-            / (x - 1)).toFixed(2)
-        setNewAdvance({
-            ...newAdvance,
-            stageThree: {
-                ...newAdvance.stageThree,
-                monthlyPayment: monthlyPayment
+    useEffect(() => {
+
+        const calculateMonthlyPayment = () => {
+            // Calculating the monthly payment for an Advance
+            // A = P (r (1+r)^n) / ( (1+r)^n -1 )
+            // A = Payment amount per period
+            // P = Initial principal or loan amount
+            // r = Interest rate per month
+            // n = Total number of payments or months
+            // let A = 0
+            // const P = amountRentSelling
+            // const r = rates[4][1] / 12
+            // const n = rates[4][0]
+            // A = P * (r * (1 + r) ^ n) / ((1 + r) ^ n - 1)
+            // console.log(A)
+            console.log(advanceDuration)
+            for (let index = 0; index < rates.length; index++) {
+                const term = rates[index][0]
+                const rate = rates[index][1]
+                const principal = amountRentSelling
+                const interestRateMonthly = rate / 100 / 12
+                const totalNumberOfPayments = advanceDuration
+                const x = Math.pow(1 + interestRateMonthly, totalNumberOfPayments)
+                const monthlyPayment = ((principal * x * interestRateMonthly)
+                    / (x - 1)).toFixed(2)
+
+                if (term == advanceDuration) {
+                    console.log(rate)
+                    console.log(rates[index])
+                    setNewAdvance({
+                        ...newAdvance,
+                        stageThree: {
+                            ...newAdvance.stageThree,
+                            yearlyInterestRate: rate,
+                            monthlyPayment: monthlyPayment,
+                        }
+                    })
+                }
             }
-        })
-    }
+        }
+
+        if (newAdvance.stageOne.monthlyRent &&
+            newAdvance.stageThree.amountRentSelling &&
+            newAdvance.stageThree.advanceDuration) {
+            calculateMonthlyPayment()
+        }
+
+    }, [newAdvance.stageOne.monthlyRent,
+    newAdvance.stageThree.amountRentSelling,
+    newAdvance.stageThree.advanceDuration])
+
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        calculateMonthlyPayment()
         // navigate("/new-advance-4")
     }
 
@@ -65,7 +89,7 @@ const NewAdvance3 = () => {
             <h4>New Advance - Rent & Advance Details</h4>
             <form className="dashboard-div">
                 <label>
-                    Amount of rent you're selling in £
+                    Amount of annual rent you're selling in £
                     <input
                         type="number"
                         name="amountRentSelling"
@@ -73,8 +97,8 @@ const NewAdvance3 = () => {
                         onChange={handleChange}
                     />
                 </label>
-                <p>Min Advance amount is £3000 </p>
-                <p>Max Advance amount is £{monthlyRent * 12}</p>
+                <p>Your min Advance amount is £3000 </p>
+                <p>Your max Advance amount is £{monthlyRent * 12}</p>
                 <label>
                     Duration of Advance in months
                     <input
@@ -88,6 +112,7 @@ const NewAdvance3 = () => {
                 <p>Between 12 months and 60 months</p>
                 <label>
                     <p>Your monthly payments will be: £{monthlyPayment}</p>
+                    <p>Your APR is {yearlyInterestRate}%</p>
                 </label>
                 <button onClick={handleSubmit}>Next stage</button>
                 <button onClick={() =>
