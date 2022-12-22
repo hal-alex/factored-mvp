@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
+import data from './data'
 
 const templateAdvance = {
     stageOne: {
@@ -55,6 +56,15 @@ const getUserLocalStorage = () => {
 }
 
 const getAdvanceLocalStorage = () => {
+    let localAdvances = localStorage.getItem('localAdvances')
+    if (localAdvances) {
+        return (localAdvances = JSON.parse(localStorage.getItem('localAdvances')))
+    } else {
+        return data
+    }
+}
+
+const getLocalAdvanceStorage = () => {
     let localNewAdvance = localStorage.getItem('localNewAdvance')
     if (localNewAdvance) {
         return (localNewAdvance = JSON.parse(localStorage.getItem('localNewAdvance')))
@@ -67,21 +77,27 @@ const AppContext = React.createContext()
 
 const AppProvider = ({ children }) => {
 
-    const [userObject, setUserObject] = useState()
-
     const [loading, setloading] = useState(true)
-
     const [passwordShow, setPasswordShow] = useState(false)
-
-    const [userProfileTestData, setUserProfileTestData] = useState(getUserLocalStorage())
-
     const [userAddressHistory, setUserAddressHistory] = useState([])
 
-    const [newAdvance, setNewAdvance] = useState(getAdvanceLocalStorage())
+    const [userProfileTestData, setUserProfileTestData] = useState(getUserLocalStorage())
+    const [newAdvance, setNewAdvance] = useState(getLocalAdvanceStorage())
+    const [testAdvances, setTestAdvances] = useState(getAdvanceLocalStorage())
 
     useEffect(() => {
         localStorage.setItem('localUserObject', JSON.stringify(userProfileTestData))
     }, [userProfileTestData])
+
+    useEffect(() => {
+        localStorage.setItem('localNewAdvance', JSON.stringify(newAdvance))
+    }, [newAdvance])
+
+    useEffect(() => {
+        localStorage.setItem('localAdvances', JSON.stringify(testAdvances))
+    }, [testAdvances])
+
+
 
 
     return <AppContext.Provider
@@ -97,6 +113,8 @@ const AppProvider = ({ children }) => {
             newAdvance,
             setNewAdvance,
             templateAdvance,
+            testAdvances,
+            setTestAdvances,
         }}
     >{children}</AppContext.Provider>
 }

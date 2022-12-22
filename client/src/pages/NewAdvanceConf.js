@@ -10,7 +10,7 @@ const NewAdvanceConf = () => {
     const { newAdvance:
         { stageOne, stageTwo,
             stageThree, stageFour, conf },
-        setNewAdvance, templateAdvance } = useGlobalContext()
+        setNewAdvance, templateAdvance, setTestAdvances, testAdvances } = useGlobalContext()
 
     const { advanceName,
         advanceDescription,
@@ -56,7 +56,34 @@ const NewAdvanceConf = () => {
         if (!acceptTerms) {
             setErrorText("You must accept terms before creating this Advance")
         } else {
+            console.log(testAdvances.length + 1)
+            const generateID = testAdvances.length + 1
             console.log("make request to backend")
+            setTestAdvances((oldValue) => [...oldValue,
+            {
+                id: generateID,
+                advanceName: advanceName,
+                advanceDescription: advanceDescription,
+                reasonForAdvance: reasonForAdvance,
+                firstLine: firstLine,
+                secondLine: secondLine,
+                postcode: postcode,
+                townOrCity: townOrCity,
+                country: country,
+                monthlyRent: monthlyRent,
+                leaseAgreement: leaseAgreement.name,
+                rentProtection: rentProtection.name,
+                tenantVetting: tenantVetting.name,
+                amountRentSelling: amountRentSelling,
+                advanceDuration: advanceDuration,
+                monthlyPayment: monthlyPayment,
+                yearlyInterestRate: yearlyInterestRate,
+                bankAccountName: bankAccountName,
+                bankAccountNumber: bankAccountNumber,
+                bankAccountSortCode: bankAccountSortCode,
+                acceptTerms: false,
+            }])
+            setNewAdvance(templateAdvance)
             navigate("/new-advance-success")
         }
     }
