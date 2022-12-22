@@ -44,11 +44,22 @@ code {
   margin-left: 500px;
 }
 
-.dashboard-table-headings {
+/* .dashboard-table-headings {
   display: flex;
   justify-content: space-between;
+} */
+
+.dashboard-table {
+  display: flex;
+  flex-direction: column;
 }
 
-/* .table-heading {
-  width: 75px;
-} */
+.table-headings-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.table-values {
+  display: flex;
+  justify-content: space-around;
+}
