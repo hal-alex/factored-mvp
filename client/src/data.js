@@ -1,6 +1,5 @@
-// This is sample data to use as placeholder
 
-export default [
+const testAdvances = [
     {
         id: 1,
         advanceName: "Bathroom Renovation",
@@ -71,3 +70,49 @@ export default [
         acceptTerms: false,
     },
 ]
+
+const sampleUserObject = {
+    id: "1",
+    title: "Mr",
+    firstName: "Test",
+    lastName: "User",
+    emailAddress: "testing@gmail.com",
+    ifVerified: false,
+    hasAddressHistory: false,
+    contactNumber: 0,
+}
+
+const templateAdvance = {
+    stageOne: {
+        advanceName: "",
+        advanceDescription: "",
+        reasonForAdvance: "",
+        firstLine: "",
+        secondLine: "",
+        postcode: "",
+        townOrCity: "",
+        country: "",
+        monthlyRent: 0,
+    },
+    stageTwo: {
+        leaseAgreement: "",
+        rentProtection: "",
+        tenantVetting: "",
+    },
+    stageThree: {
+        amountRentSelling: 0,
+        advanceDuration: 0,
+        monthlyPayment: 0,
+        yearlyInterestRate: 0,
+    },
+    stageFour: {
+        bankAccountName: "",
+        bankAccountNumber: "",
+        bankAccountSortCode: "",
+    },
+    conf: {
+        acceptTerms: false,
+    }
+}
+
+export { testAdvances, sampleUserObject, templateAdvance }

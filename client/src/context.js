@@ -1,50 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import data from './data'
-
-const templateAdvance = {
-    stageOne: {
-        advanceName: "",
-        advanceDescription: "",
-        reasonForAdvance: "",
-        firstLine: "",
-        secondLine: "",
-        postcode: "",
-        townOrCity: "",
-        country: "",
-        monthlyRent: 0,
-    },
-    stageTwo: {
-        leaseAgreement: "",
-        rentProtection: "",
-        tenantVetting: "",
-    },
-    stageThree: {
-        amountRentSelling: 0,
-        advanceDuration: 0,
-        monthlyPayment: 0,
-        yearlyInterestRate: 0,
-    },
-    stageFour: {
-        bankAccountName: "",
-        bankAccountNumber: "",
-        bankAccountSortCode: "",
-    },
-    conf: {
-        acceptTerms: false,
-    }
-}
-
-const sampleUserObject = {
-    id: "1",
-    title: "Mr",
-    firstName: "Test",
-    lastName: "User",
-    emailAddress: "testing@gmail.com",
-    ifVerified: false,
-    hasAddressHistory: false,
-    contactNumber: 0,
-}
-
+import { testAdvances, sampleUserObject, templateAdvance } from './data'
 
 const getUserLocalStorage = () => {
     let localUserObject = localStorage.getItem('localUserObject')
@@ -60,7 +15,7 @@ const getAdvanceLocalStorage = () => {
     if (localAdvances) {
         return (localAdvances = JSON.parse(localStorage.getItem('localAdvances')))
     } else {
-        return data
+        return testAdvances
     }
 }
 
@@ -96,9 +51,6 @@ const AppProvider = ({ children }) => {
     useEffect(() => {
         localStorage.setItem('localAdvances', JSON.stringify(testAdvances))
     }, [testAdvances])
-
-
-
 
     return <AppContext.Provider
         value={{
