@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import { useGlobalContext } from '../context'
+import { useNavigate } from 'react-router-dom'
 
 const ProfilePage = () => {
+
+  const navigate = useNavigate()
 
   const { userProfileTestData, setUserProfileTestData } = useGlobalContext()
   const [showForm, setShowForm] = useState(false)
@@ -25,13 +28,13 @@ const ProfilePage = () => {
         <p>First name: {userProfileTestData.firstName}</p>
         <p>Last name: {userProfileTestData.lastName}</p>
         <p>Email addres: {userProfileTestData.emailAddress}</p>
-        <p>Verification status: 
+        <p>Verification status:
           {userProfileTestData.ifVerified ?
             "Verified" : "Unverified"}</p>
-        <p>Address history: 
+        <p>Address history:
           {userProfileTestData.hasAddressHistory ?
             "Submitted" : "Incomplete"}</p>
-        <p>Contact number: 
+        <p>Contact number:
           {userProfileTestData.contactNumber ?
             userProfileTestData.contactNumber :
             <button onClick={() =>
@@ -50,6 +53,7 @@ const ProfilePage = () => {
           </form>
         }
       </div>
+      <button onClick={() => navigate("/dashboard")}>Back to dashboard</button>
     </div>
   )
 }

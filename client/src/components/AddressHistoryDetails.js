@@ -1,7 +1,10 @@
 import React from 'react'
 import { useGlobalContext } from '../context'
+import { useNavigate } from "react-router-dom"
 
 const AddressHistoryDetails = () => {
+
+    const navigate = useNavigate()
 
     const { userAddressHistory } = useGlobalContext()
 
@@ -24,6 +27,7 @@ const AddressHistoryDetails = () => {
                     </div>
                 )
             })}
+            <button onClick={() => navigate("/dashboard")}>Back to dashboard</button>
         </div>
     )
 }

@@ -1,9 +1,11 @@
 import React from 'react'
 import Persona from 'persona'
-import { useEffect } from 'react'
 import { useGlobalContext } from '../context'
+import { useNavigate } from "react-router-dom"
 
 const IDVerification = () => {
+
+    const navigate = useNavigate()
 
     const { userProfileTestData, setUserProfileTestData } = useGlobalContext()
 
@@ -33,6 +35,7 @@ const IDVerification = () => {
                     ...userProfileTestData,
                     "ifVerified": true
                 })}>Click to change KYC status</button>
+            <button onClick={() => navigate("/dashboard")}>Back to dashboard</button>
         </div>
     )
 }
