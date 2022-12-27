@@ -1,8 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -12,8 +16,69 @@ code {
     monospace;
 }
 
+.main-header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #0f1825;
+  padding: 0.5rem 1rem;
+  z-index: 1;
+}
+
+.main-header>div {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.main-header__brand {
+  color: #0e4f1f;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.5rem;
+  height: 4rem;
+  /* width: 20px; */
+  display: inline-block;
+}
+
+.main-header__brand img {
+  height: 100%;
+  /* width: 100%; */
+}
+
+.main-navbar {
+  display: inline-block;
+  text-align: right;
+  width: calc(100% - 300px);
+  vertical-align: middle;
+}
+
+.main-navbar__items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.main-navbar__item {
+  display: inline-block;
+  margin: 0 1rem;
+}
+
+.main-navbar__item a {
+  text-decoration: none;
+  color: white;
+  padding: 3px 0;
+}
+
+.main-navbar__item a:hover,
+.main-navbar__item a:active {
+  color: white;
+  border-bottom: 5px solid white;
+}
+
+
 .center {
-  margin: auto;
+  margin-top: 7rem;
   width: 50%;
   border: 1px solid green;
   padding: 10px;

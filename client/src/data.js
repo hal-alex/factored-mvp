@@ -75,6 +75,7 @@ const sampleUserObject = {
     id: "1",
     title: "Mr",
     firstName: "Test",
+    authenticated: false,
     lastName: "User",
     emailAddress: "testing@gmail.com",
     ifVerified: false,
