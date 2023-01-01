@@ -65,6 +65,40 @@ code {
   border-bottom: 5px solid white;
 }
 
+.btn-primary {
+  background: #4fd1a6;
+  color: #0f1825;
+  font: inherit;
+  border: 1.5px solid #4fd1a6;
+  padding: 1rem 2rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-primary:hover,
+.btn-primary:active {
+  background: #00c483;
+}
+
+/* .main-flex-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+} */
+
+.homepage-flex-container {
+  margin-top: 15rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.homepage-flex-container .btn-primary {
+  width: 10rem;
+  margin: 1rem;
+}
 
 .center {
   margin-top: 7rem;
