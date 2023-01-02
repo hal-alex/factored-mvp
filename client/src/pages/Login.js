@@ -37,35 +37,33 @@ const Login = () => {
   }
 
   return (
-    <div className="form-div">
-      <form className="form-container">
-        <h3>Access Your Account</h3>
-        <label> Email Address
-          <input
-            value={loginFormData.emailAddress}
-            onChange={handleChange}
-            required
-            type="email"
-            name="emailAddress"
-          />
-        </label>
-        <label> Password
-          <input
-            value={loginFormData.password}
-            onChange={handleChange}
-            required
-            type={passwordShow ? "text" : "password"}
-            name="password"
-          />
-          <p style={{ textDecoration: "underline" }} onClick={() =>
-            setPasswordShow(!passwordShow)}>
-            {passwordShow ? "hide password" : "show password"}</p>
-        </label>
-        {loginFormError}
-        <Link to="/forgotpassword">Forgot password?</Link>
-        <button onClick={handleLoginFormSubmit}>Log In</button>
-      </form>
-    </div>
+    <form className="auth-form-container">
+      <h2>Access Your Account</h2>
+      <label>Email Address</label>
+      <input
+        value={loginFormData.emailAddress}
+        onChange={handleChange}
+        required
+        type="email"
+        name="emailAddress"
+      />
+      <label>Password</label>
+      <input
+        value={loginFormData.password}
+        onChange={handleChange}
+        required
+        type={passwordShow ? "text" : "password"}
+        name="password"
+      />
+      <p style={{ textDecoration: "underline" }} onClick={() =>
+        setPasswordShow(!passwordShow)}>
+        {passwordShow ? "hide password" : "show password"}</p>
+      {loginFormError ? <p className="form-error-text">{loginFormError}</p> : ""}
+      <Link to="/forgotpassword">Forgot password?</Link>
+      <button
+        className="btn-secondary"
+        onClick={handleLoginFormSubmit}>Log In</button>
+    </form>
   )
 }
 

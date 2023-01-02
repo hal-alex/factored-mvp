@@ -21,39 +21,40 @@ const ProfilePage = () => {
   }
 
   return (
-    <div className="dashboard-div">
-      <h4>ProfilePage</h4>
-      <div>
-        <p>Title: {userProfileTestData.title}</p>
-        <p>First name: {userProfileTestData.firstName}</p>
-        <p>Last name: {userProfileTestData.lastName}</p>
-        <p>Email addres: {userProfileTestData.emailAddress}</p>
-        <p>Verification status:
-          {userProfileTestData.ifVerified ?
-            "Verified" : "Unverified"}</p>
-        <p>Address history:
-          {userProfileTestData.hasAddressHistory ?
-            "Submitted" : "Incomplete"}</p>
-        <p>Contact number:
-          {userProfileTestData.contactNumber ?
-            userProfileTestData.contactNumber :
-            <button onClick={() =>
-              setShowForm(!showForm)}>
-              {showForm ? "Cancel" : "Add number"}</button>}
-        </p>
-        {showForm &&
-          <form>
-            <input
-              type="tel"
-              name="contactNumber"
-              value={newNumber}
-              onChange={handleChange}
-            />
-            <button onClick={handleProfileFormChange}>Submit</button>
-          </form>
-        }
-      </div>
-      <button onClick={() => navigate("/dashboard")}>Back to dashboard</button>
+    <div className="profile-container">
+      <h2>Your Profile</h2>
+      <p className="profile-title">Title: {userProfileTestData.title}</p>
+      <p className="profile-title">First name: {userProfileTestData.firstName}</p>
+      <p className="profile-title">Last name: {userProfileTestData.lastName}</p>
+      <p className="profile-title">Email addres: {userProfileTestData.emailAddress}</p>
+      <p className="profile-title">Verification status: 
+        {userProfileTestData.ifVerified ?
+          "Verified" : "Unverified"}</p>
+      <p className="profile-title">Address history: 
+        {userProfileTestData.hasAddressHistory ?
+          "Submitted" : "Incomplete"}</p>
+      <p className="profile-title">Contact number: 
+        {userProfileTestData.contactNumber ?
+          userProfileTestData.contactNumber :
+          <button className="btn-secondary" onClick={() =>
+            setShowForm(!showForm)}>
+            {showForm ? "Cancel" : "Add number"}</button>}
+      </p>
+      {showForm &&
+        <form>
+          <input
+            type="tel"
+            name="contactNumber"
+            value={newNumber}
+            onChange={handleChange}
+          />
+          <button className="btn-secondary" onClick={handleProfileFormChange}>Submit</button>
+        </form>
+      }
+      <button
+        className="btn-secondary"
+        onClick={() => navigate("/dashboard")}>
+        Back to dashboard</button>
     </div>
   )
 }

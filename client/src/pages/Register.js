@@ -59,71 +59,67 @@ const Register = () => {
   }
 
   return (
-    <div className="form-div">
-      <form className="form-container">
-        <h3>Register New Account</h3>
-        <label>Title
-          <select name="title" onChange={handleChange}>
-            {titleOptions.map((title, index) => {
-              return <option key={index}>{title}</option>
-            })}
-          </select>
-        </label>
-        <label>First Name
-          <input
-            value={regFormData.firstName}
-            onChange={handleChange}
-            required
-            type="text"
-            name="firstName"
-            placeholder=""
 
-          />
-        </label>
-        <label> Last Name
-          <input
-            value={regFormData.lastName}
-            onChange={handleChange}
-            required
-            type="text"
-            name="lastName"
-            placeholder=""
-          />
-        </label>
-        <label> Email Address
-          <input
-            value={regFormData.emailAddress}
-            onChange={handleChange}
-            required
-            type="email"
-            name="emailAddress"
-          />
-        </label>
-        <label> Password
-          <input
-            value={regFormData.password}
-            onChange={handleChange}
-            required
-            type={passwordShow ? "text" : "password"}
-            name="password"
-          />
-          <p style={{ textDecoration: "underline" }}
-            onClick={() => setPasswordShow(!passwordShow)}>
-            {passwordShow ? "hide password" : "show password"}</p>
-        </label>
-        <label>
-          <input type="checkbox" onClick={() => setRegFormData((oldValue) => {
-            return {
-              ...oldValue, "acceptTermsConditions":
-                !regFormData.acceptTermsConditions
-            }
-          })} />
-          I accept Factored's Terms & Conditions and Privacy Policy
-        </label>
-        {regError}
-        <button onClick={handleRegisterFormSubmit}>Create Account</button>
-      </form>
-    </div>
+    <form className="auth-form-container">
+      <h2>Register New Account</h2>
+      <label>Title</label>
+      <select name="title" onChange={handleChange}>
+        {titleOptions.map((title, index) => {
+          return <option key={index}>{title}</option>
+        })}
+      </select>
+      <label>First Name</label>
+      <input
+        value={regFormData.firstName}
+        onChange={handleChange}
+        required
+        type="text"
+        name="firstName"
+        placeholder=""
+      />
+      <label>Last Name</label>
+      <input
+        value={regFormData.lastName}
+        onChange={handleChange}
+        required
+        type="text"
+        name="lastName"
+        placeholder=""
+      />
+      <label>Email Address</label>
+      <input
+        value={regFormData.emailAddress}
+        onChange={handleChange}
+        required
+        type="email"
+        name="emailAddress"
+      />
+      <label>Password</label>
+      <input
+        value={regFormData.password}
+        onChange={handleChange}
+        required
+        type={passwordShow ? "text" : "password"}
+        name="password"
+      />
+      <p className="auth-form-password-widget" onClick={() => setPasswordShow(!passwordShow)}>
+        {passwordShow ? "hide password" : "show password"}</p>
+      <div className="auth-form-checkbox">
+        <input type="checkbox" onClick={() => setRegFormData((oldValue) => {
+          return {
+            ...oldValue, "acceptTermsConditions":
+              !regFormData.acceptTermsConditions
+          }
+        })} />
+        <label>I accept Factored's Terms & Conditions and Privacy Policy</label>
+      </div>
+      {regError ? <p className="form-error-text">{regError}</p> : ""}
+      <button
+        className="btn-secondary"
+        onClick={handleRegisterFormSubmit}
+      >Create Account</button>
+    </form>
+
   )
 }
 

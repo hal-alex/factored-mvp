@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro&family=Montserrat:wght@200;300;400;500;700;900&display=swap');
 
 * {
   box-sizing: border-box;
@@ -118,7 +118,7 @@ code {
 } */
 
 .homepage-flex-container {
-  margin-top: 15rem;
+  margin-top: 10rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -179,4 +179,46 @@ code {
 .table-values {
   display: flex;
   justify-content: space-around;
+}
+
+.auth-form-container {
+  margin: 10rem auto;
+  display: grid;
+  max-width: 35rem;
+  row-gap: 0.6rem;
+}
+
+.auth-form-container select {
+  font-family: inherit;
+}
+
+.auth-form-container label {
+  font-weight: 500;
+}
+
+.auth-form-container h2 {
+  justify-self: center;
+}
+
+.form-error-text {
+  color: red;
+  font-weight: 500;
+}
+
+.auth-form-password-widget {
+  text-decoration: underline;
+}
+
+.profile-container {
+  margin: 10rem auto;
+  max-width: 35rem;
+  display: grid;
+}
+
+.profile-container h2 {
+  justify-self: center;
+}
+
+.profile-container .profile-title {
+  font-weight: 500;
 }
