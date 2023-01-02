@@ -26,16 +26,17 @@ const IDVerification = () => {
     }
 
     return (
-        <div>
-            <h3>ID Verification</h3>
-            <div></div>
-            <button onClick={() => startVerification}> Start verification</button>
-            <button onClick={() =>
+        <div className="generic-container id-verification-container">
+            <h2>ID Verification</h2>
+            <button className="btn-secondary" onClick={() =>
+                startVerification}> Start verification</button>
+            <button className="btn-secondary" onClick={() =>
                 setUserProfileTestData({
                     ...userProfileTestData,
                     "ifVerified": true
                 })}>Click to change KYC status</button>
-            <button onClick={() => navigate("/dashboard")}>Back to dashboard</button>
+            <button className="btn-secondary" onClick={() =>
+                navigate("/dashboard")}>Back to dashboard</button>
         </div>
     )
 }

@@ -10,13 +10,12 @@ const AddressHistoryDetails = () => {
 
     return (
         <div>
-            <h4>Address History</h4>
             {userAddressHistory.map((address, index) => {
                 const { firstLine, secondLine, postcode,
                     townOrCity, country, startDate, endDate } = address
                 return (
-                    <div>
-                        <h5>Address in {postcode}</h5>
+                    <div key={index}>
+                        <h4>Address in {postcode}</h4>
                         <p>First line: {firstLine}</p>
                         <p>Second line: {secondLine}</p>
                         <p>Post code: {postcode}</p>
@@ -27,7 +26,10 @@ const AddressHistoryDetails = () => {
                     </div>
                 )
             })}
-            <button onClick={() => navigate("/dashboard")}>Back to dashboard</button>
+            <button className="btn-secondary"
+                onClick={() => navigate("/dashboard")}>
+                Back to dashboard
+            </button>
         </div>
     )
 }

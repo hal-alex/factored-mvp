@@ -1,7 +1,7 @@
 
 const testAdvances = [
     {
-        id: 1,
+        id: 1111,
         advanceName: "Bathroom Renovation",
         advanceDescription: "Repairing boiler",
         reasonForAdvance: "Repairs",
@@ -26,7 +26,7 @@ const testAdvances = [
         nextPaymentDate: "01-02-2023",
     },
     {
-        id: 2,
+        id: 1112,
         advanceName: "New kitchen",
         advanceDescription: "Replacing old kitchen",
         reasonForAdvance: "Repairs",
@@ -51,7 +51,7 @@ const testAdvances = [
         nextPaymentDate: "01-02-2023",
     },
     {
-        id: 3,
+        id: 1113,
         advanceName: "Taking out equity",
         advanceDescription: "Paying off debt",
         reasonForAdvance: "Debt consolidation",

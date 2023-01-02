@@ -33,8 +33,8 @@ const IndividualAdvance = () => {
     } = selectedAdvance
 
     return (
-        <div>
-            <h3>Individual Advance</h3>
+        <div className="generic-container">
+            <h2>Individual Advance</h2>
             <h4>{advanceName}</h4>
             <p>Reason for advance: {reasonForAdvance}</p>
             <p>Description: {advanceDescription}</p>
@@ -50,8 +50,18 @@ const IndividualAdvance = () => {
             <p>Name on bank account: {bankAccountName}</p>
             <p>Your bank account number: {bankAccountNumber}</p>
             <p>Your bank account sort code: {bankAccountSortCode}</p>
-            <Link to="/new-advance-1"><button>Create new Advance</button></Link>
-            <Link to="/dashboard"><button>Back to dashboard</button></Link>
+            <div className='two-button-container'>
+                <Link to="/new-advance-1">
+                    <button className="btn-secondary">
+                        Create new Advance
+                    </button>
+                </Link>
+                <Link to="/dashboard">
+                    <button className="btn-secondary">
+                        Back to dashboard
+                    </button>
+                </Link>
+            </div>
         </div>
     )
 }

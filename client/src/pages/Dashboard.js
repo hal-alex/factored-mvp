@@ -62,12 +62,12 @@ const Dashboard = () => {
       <div className="table-container">
         <h2>Your advances</h2>
         <div className="dashboard-table">
-          <div className="table-headings-container">
+          <div className="table-headings-values">
+
             {dashboardHeadings.map((heading, index) => {
-              return <div key={index}>{heading}</div>
+              return <div className="table-heading" key={index}>{heading}</div>
             })}
-          </div>
-          <div className="dashboard-table-results">
+
             {testAdvances.map(advance => {
               const {
                 id,
@@ -82,9 +82,10 @@ const Dashboard = () => {
                 nextPaymentDate,
               } = advance
               return (
-                <div key={id} className="table-values">
+                <>
                   <div><Link to={`/advances/${id}`}>{id}</Link></div>
-                  <div className="table-value-address">{`${firstLine}, ${secondLine}, ${postcode}, ${townOrCity}`}</div>
+                  <div className="table-value-address">{`${firstLine}, 
+                  ${secondLine}, ${postcode}, ${townOrCity}`}</div>
                   <div>{`£${amountRentSelling}`}</div>
                   <div>{`${advanceDuration} months`}</div>
                   <div>{`£${amountRentSelling}`}</div>
@@ -92,7 +93,7 @@ const Dashboard = () => {
                   <div>{`£${monthlyPayment}`}</div>
                   <div>{fee}</div>
                   <div>{nextPaymentDate}</div>
-                </div>
+                </>
               )
             })}
           </div>
