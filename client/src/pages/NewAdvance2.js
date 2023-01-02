@@ -30,9 +30,9 @@ const NewAdvance2 = () => {
     }
 
     return (
-        <div className="dashboard-div">
-            <h4>New Advance - Document Upload</h4>
-            <form className="dashboard-div">
+        <div className="generic-container">
+            <h2>New Advance - Document Upload</h2>
+            <form className="address-verification-form">
                 <label>
                     Upload your lease agreement (required)
                     <input
@@ -61,9 +61,17 @@ const NewAdvance2 = () => {
                         onChange={handleChange}
                     />
                 </label>
-                <button onClick={handleSubmit}>Next stage</button>
-                <button onClick={() =>
-                    navigate("/new-advance-1")}>Previous stage</button>
+                <div className="two-button-container">
+                    <button className="btn-secondary" onClick={() =>
+                        navigate("/new-advance-1")}>
+                        {`< Previous stage`}
+                    </button>
+                    <button
+                        className="btn-secondary"
+                        onClick={handleSubmit}>
+                        {`Next stage >`}
+                    </button>
+                </div>
             </form>
         </div>
     )

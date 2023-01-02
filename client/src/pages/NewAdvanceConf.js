@@ -89,8 +89,8 @@ const NewAdvanceConf = () => {
     }
 
     return (
-        <div className="dashboard-div">
-            <h4>New Advance Confirmation</h4>
+        <div className="generic-container">
+            <h2>New Advance Confirmation</h2>
             <div>
                 <div>
                     <h4>Property & Rent Details</h4>
@@ -100,7 +100,7 @@ const NewAdvanceConf = () => {
                     <p>Property address: {firstLine}, {secondLine},
                         {postcode}, {townOrCity}, {country}</p>
                     <p>Monthly rent for this property: £{monthlyRent}</p>
-                    <button onClick={() =>
+                    <button className="btn-secondary" onClick={() =>
                         navigate("/new-advance-1")}>Edit these details</button>
                 </div>
                 <div>
@@ -108,7 +108,7 @@ const NewAdvanceConf = () => {
                     <p>Lease agreement: {leaseAgreement.name}</p>
                     <p>Rent protection: {rentProtection.name}</p>
                     <p>Tenant vetting: {tenantVetting.name}</p>
-                    <button onClick={() =>
+                    <button className="btn-secondary" onClick={() =>
                         navigate("/new-advance-2")}>Edit these details</button>
                 </div>
                 <div>
@@ -117,7 +117,7 @@ const NewAdvanceConf = () => {
                     <p>Advance duration in months: {advanceDuration}</p>
                     <p>Monthly payments to cover this Advance: £{monthlyPayment}</p>
                     <p>Your APR for this Advance: {yearlyInterestRate}%</p>
-                    <button onClick={() =>
+                    <button className="btn-secondary" onClick={() =>
                         navigate("/new-advance-3")}>Edit these details</button>
                 </div>
                 <div>
@@ -125,16 +125,22 @@ const NewAdvanceConf = () => {
                     <p>Name on bank account: {bankAccountName}</p>
                     <p>Your bank account number: {bankAccountNumber}</p>
                     <p>Your bank account sort code: {bankAccountSortCode}</p>
-                    <button onClick={() =>
+                    <button className="btn-secondary" onClick={() =>
                         navigate("/new-advance-4")}>Edit these details</button>
                 </div>
             </div>
-            <label>
-                <input type="checkbox" onClick={() => handleTickbox()} />
-                I accept Factored's Terms & Conditions for this Advance
-            </label>
+            <div className="new-advance-conf-tickbox">
+                <label className="new-advance-conf-tickbox">
+                    <input type="checkbox" onClick={() => handleTickbox()} />
+                    I accept Factored's Terms & Conditions for this Advance
+                </label>
+            </div>
             <p>{errorText}</p>
-            <button onClick={() => handleSubmit()}>Submit New Advance</button>
+            <div className="full-container-width-button">
+                <button className="btn-primary" onClick={() =>
+                    handleSubmit()}>Submit New Advance</button>
+            </div>
+
         </div>
     )
 }
