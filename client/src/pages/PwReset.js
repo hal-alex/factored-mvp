@@ -29,23 +29,24 @@ const PwReset = () => {
   }
 
   return (
-    <div className="form-div">
-      <form className="form-container">
-        <h3>Reset Your Password</h3>
-        <label> Email Address
-          <input
-            value={pwResetFormData.emailAddress}
-            onChange={handleChange}
-            required
-            type="email"
-            name="emailAddress"
-          />
-        </label>
-        {pwResetFormError}
-        {formMessage}
-        <button onClick={handlePwResetFormSubmit}>Reset Password</button>
-      </form>
-    </div>
+    <form className="auth-form-container">
+      <h2>Reset Your Password</h2>
+      <label> Email Address
+      </label>
+      <input
+        value={pwResetFormData.emailAddress}
+        onChange={handleChange}
+        required
+        type="email"
+        name="emailAddress"
+      />
+      {pwResetFormError ? <p className="form-error-text">{pwResetFormError}</p> : ""}
+      {formMessage}
+      <button
+        className="btn-secondary"
+        onClick={handlePwResetFormSubmit}>
+        Reset Password</button>
+    </form>
   )
 }
 
