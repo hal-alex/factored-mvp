@@ -89,92 +89,98 @@ const AddressHistoryInput = () => {
     }
 
     return (
-        <div className="dashboard-div">
-            <h3>Address Verification</h3>
+        <div>
             <p>We require at least 3 years of address history for a soft credit check</p>
-            <p>So far, we have address history for you for {duration} months</p>
+            <p>{`So far, we have address history for you for ${duration} months`}</p>
             {duration >= 36 && <p>Address history is good</p>
                 || <p>Please add more addresses</p>}
-            <button onClick={addMoreAddressFields}>Add another address</button>
-            <div>
-                <form className="form-container" onSubmit={submitForm}>
-                    {addressHistory.map((address, index) => {
-                        const { firstLine, secondLine, postcode,
-                            townOrCity, country, startDate, endDate } = address
-                        let addressDurationHist = 0
-                        if (endDate && startDate) {
-                            addressDurationHist = calculateMonths(endDate, startDate)
-                        }
-                        return (
-                            <div key={index}>
-                                <input
-                                    type="text"
-                                    name="firstLine"
-                                    value={firstLine}
-                                    placeholder="First Address Line"
-                                    onChange={(e) => handleChange(index, e)}
-                                />
-                                <input
-                                    type="text"
-                                    name="secondLine"
-                                    value={secondLine}
-                                    placeholder="Second Address Line"
-                                    onChange={(e) => handleChange(index, e)}
-                                />
-                                <input
-                                    type="text"
-                                    name="postcode"
-                                    value={postcode}
-                                    placeholder="Post code"
-                                    onChange={(e) => handleChange(index, e)}
-                                />
-                                <input
-                                    type="text"
-                                    name="townOrCity"
-                                    value={townOrCity}
-                                    placeholder="Town/City"
-                                    onChange={(e) => handleChange(index, e)}
-                                />
-                                <input
-                                    type="text"
-                                    name="country"
-                                    value={country}
-                                    placeholder="Country"
-                                    onChange={(e) => handleChange(index, e)}
-                                />
-                                <label> Start Date
-                                    <input
-                                        type="month"
-                                        name="startDate"
-                                        value={startDate}
-                                        onChange={(e) => handleChange(index, e)}
-                                        required
-                                    />
-                                </label>
-                                <label>End Date
-                                    <input
-                                        type="month"
-                                        name="endDate"
-                                        value={endDate}
-                                        onChange={(e) => handleChange(index, e)}
-                                        required
-                                    />
-                                </label>
-                                {addressDurationHist ?
-                                    `You have spent ${addressDurationHist} 
+
+            <form className="address-verification-form" onSubmit={submitForm}>
+                {addressHistory.map((address, index) => {
+                    const { firstLine, secondLine, postcode,
+                        townOrCity, country, startDate, endDate } = address
+                    let addressDurationHist = 0
+                    if (endDate && startDate) {
+                        addressDurationHist = calculateMonths(endDate, startDate)
+                    }
+                    return (
+                        <div className="address-verification-form-address" key={index}>
+                            <label>First Address Line</label>
+                            <input
+                                type="text"
+                                name="firstLine"
+                                value={firstLine}
+                                onChange={(e) => handleChange(index, e)}
+                            />
+                            <label>Second Address Line</label>
+                            <input
+                                type="text"
+                                name="secondLine"
+                                value={secondLine}
+                                onChange={(e) => handleChange(index, e)}
+                            />
+                            <label>Post code</label>
+                            <input
+                                type="text"
+                                name="postcode"
+                                value={postcode}
+                                onChange={(e) => handleChange(index, e)}
+                            />
+                            <label>Town/City</label>
+                            <input
+                                type="text"
+                                name="townOrCity"
+                                value={townOrCity}
+                                onChange={(e) => handleChange(index, e)}
+                            />
+                            <label>Country</label>
+                            <input
+                                type="text"
+                                name="country"
+                                value={country}
+                                onChange={(e) => handleChange(index, e)}
+                            />
+                            <label>Start Date</label>
+                            <input
+                                type="month"
+                                name="startDate"
+                                value={startDate}
+                                onChange={(e) => handleChange(index, e)}
+                                required
+                            />
+                            <label>End Date</label>
+                            <input
+                                type="month"
+                                name="endDate"
+                                value={endDate}
+                                onChange={(e) => handleChange(index, e)}
+                                required
+                            />
+                            {addressDurationHist ?
+                                `You have spent ${addressDurationHist} 
                                     months at this address`
-                                    : ""}
-                                <button onClick={removeAddress}>Remove Address</button>
-                            </div>
-                        )
-                    })}
+                                : ""}
+                            <button className="btn-secondary"
+                                onClick={removeAddress}>
+                                Remove Address</button>
+                        </div>
+                    )
+                })}
+                <div className="two-button-container">
+                    <button className="btn-secondary"
+                        onClick={addMoreAddressFields}>
+                        Add another address
+                    </button>
+
                     <button
+                        className="btn-secondary"
                         disabled={duration >= 36 ? false : true}
                         onClick={submitForm}>
                         Submit Address History
                     </button>
-                </form>
-            </div>
+                </div>
+            </form>
+
         </div>
     )
 }

@@ -7,8 +7,8 @@ import AddressHistoryInput from '../components/AddressHistoryInput'
 const AddressVerification = () => {
   const { userProfileTestData } = useGlobalContext()
   return (
-    <div className="dashboard-div">
-      <h3>Address Verification</h3>
+    <div className="generic-container">
+      <h2>Address Verification</h2>
       {userProfileTestData.hasAddressHistory ?
 
         <AddressHistoryDetails></AddressHistoryDetails>

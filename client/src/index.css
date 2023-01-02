@@ -224,26 +224,53 @@ code {
 }
 
 .dashboard-table {
-  display: grid;
-  row-gap: 1rem;
+  margin-top: 2rem;
 }
 
-.table-headings-container,
-.table-values {
+.table-headings-values {
   display: grid;
   grid-template-columns: repeat(9, auto);
   column-gap: 1rem;
+  row-gap: 2rem;
 }
 
-.table-headings-container div {
+.table-headings-values .table-heading {
   text-align: center;
   font-weight: 600;
+  padding: 0.5rem;
+  background-color: #00c483;
 }
 
-/* .table-values {
+.table-headings-values div {
+  text-align: center;
+}
 
-} */
+.generic-container {
+  margin: 10rem auto;
+  max-width: 35rem;
+}
 
-.table-value-address {
-  max-width: 5rem;
+.generic-container h2 {
+  text-align: center;
+}
+
+.id-verification-container {
+  display: grid;
+  row-gap: 2rem;
+}
+
+.two-button-container {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  justify-items: center;
+}
+
+.address-verification-form {
+  display: grid;
+  row-gap: 2rem;
+}
+
+.address-verification-form-address {
+  display: grid;
+  row-gap: 0.5rem;
 }
