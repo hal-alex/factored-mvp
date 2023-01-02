@@ -166,20 +166,20 @@ code {
   justify-content: space-between;
 } */
 
-.dashboard-table {
+/* .dashboard-table {
   display: flex;
   flex-direction: column;
-}
+} */
 
-.table-headings-container {
+/* .table-headings-container {
   display: flex;
   justify-content: space-evenly;
-}
+} */
 
-.table-values {
+/* .table-values {
   display: flex;
   justify-content: space-around;
-}
+} */
 
 .auth-form-container {
   margin: 10rem auto;
@@ -221,4 +221,29 @@ code {
 
 .profile-container .profile-title {
   font-weight: 500;
+}
+
+.dashboard-table {
+  display: grid;
+  row-gap: 1rem;
+}
+
+.table-headings-container,
+.table-values {
+  display: grid;
+  grid-template-columns: repeat(9, auto);
+  column-gap: 1rem;
+}
+
+.table-headings-container div {
+  text-align: center;
+  font-weight: 600;
+}
+
+/* .table-values {
+
+} */
+
+.table-value-address {
+  max-width: 5rem;
 }

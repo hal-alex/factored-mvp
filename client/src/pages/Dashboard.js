@@ -10,13 +10,22 @@ const Dashboard = () => {
   const phoneNumber = userProfileTestData.contactNumber
   const addressHistoryStatus = userProfileTestData.hasAddressHistory
 
-  const dashboardHeadings = ["Name", "Address",
-    "Total rent sold", "Advance duration (months)", "Monthly payment"]
+  const dashboardHeadings = [
+    "Advance ID",
+    "Property Address",
+    "Total Advance Amount (£)",
+    "Total term (m)",
+    "Remaining Advance Balance (£)",
+    "Remaining term (m)",
+    "Monthly payment amount (£)",
+    "Fee (%)",
+    "Next Payment date",
+  ]
 
   return (
     <div className="dashboard-main-container">
       <div className="dashboard-div">
-        <h3>Your dashboard</h3>
+        <h2>Your dashboard</h2>
         <div>
           <h4>Complete these steps to create your first advance</h4>
           <div>
@@ -51,42 +60,43 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="table-container">
-        <h4>Your advances</h4>
-        <table className="dashboard-table">
+        <h2>Your advances</h2>
+        <div className="dashboard-table">
           <div className="table-headings-container">
             {dashboardHeadings.map((heading, index) => {
-              return <th key={index}>{heading}</th>
+              return <div key={index}>{heading}</div>
             })}
           </div>
-          <div >
+          <div className="dashboard-table-results">
             {testAdvances.map(advance => {
               const {
                 id,
-                advanceName,
-                advanceDescription,
-                reasonForAdvance,
                 firstLine,
                 secondLine,
                 postcode,
                 townOrCity,
-                country,
-                monthlyRent,
                 amountRentSelling,
                 advanceDuration,
                 monthlyPayment,
+                fee,
+                nextPaymentDate,
               } = advance
               return (
-                <tr key={id} className="table-values">
-                  <td><Link to={`/advances/${id}`}>{advanceName}</Link></td>
-                  <td>{`${firstLine}, ${secondLine}, ${postcode}, ${townOrCity}`}</td>
-                  <td>£{amountRentSelling}</td>
-                  <td>{advanceDuration}</td>
-                  <td>£{monthlyPayment}</td>
-                </tr>
+                <div key={id} className="table-values">
+                  <div><Link to={`/advances/${id}`}>{id}</Link></div>
+                  <div className="table-value-address">{`${firstLine}, ${secondLine}, ${postcode}, ${townOrCity}`}</div>
+                  <div>{`£${amountRentSelling}`}</div>
+                  <div>{`${advanceDuration} months`}</div>
+                  <div>{`£${amountRentSelling}`}</div>
+                  <div>{`${advanceDuration} months`}</div>
+                  <div>{`£${monthlyPayment}`}</div>
+                  <div>{fee}</div>
+                  <div>{nextPaymentDate}</div>
+                </div>
               )
             })}
           </div>
-        </table>
+        </div>
       </div>
     </div>
   )

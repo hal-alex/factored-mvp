@@ -11,7 +11,7 @@ const Navbar = () => {
         </NavLink>
       </div>
       <nav className="main-navbar">
-        <ul class="main-navbar__items">
+        <ul className="main-navbar__items">
           {/* <ul className="nav-bar-links"> */}
           <li className="main-navbar__item"><NavLink to="/">Homepage</NavLink></li>
           <li className="main-navbar__item"><NavLink to="/register">Register</NavLink></li>
