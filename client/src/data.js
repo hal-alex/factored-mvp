@@ -22,6 +22,8 @@ const testAdvances = [
         bankAccountNumber: "1234567",
         bankAccountSortCode: "11-22-33",
         acceptTerms: false,
+        fee: "2%",
+        nextPaymentDate: "01-02-2023",
     },
     {
         id: 2,
@@ -45,6 +47,8 @@ const testAdvances = [
         bankAccountNumber: "9101112",
         bankAccountSortCode: "11-22-33",
         acceptTerms: false,
+        fee: "1%",
+        nextPaymentDate: "01-02-2023",
     },
     {
         id: 3,
@@ -68,6 +72,8 @@ const testAdvances = [
         bankAccountNumber: "1314151",
         bankAccountSortCode: "11-22-33",
         acceptTerms: false,
+        fee: "0.5%",
+        nextPaymentDate: "01-02-2023",
     },
 ]
 
