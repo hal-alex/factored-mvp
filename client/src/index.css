@@ -267,10 +267,18 @@ code {
 
 .address-verification-form {
   display: grid;
-  row-gap: 2rem;
+  row-gap: 1rem;
 }
 
 .address-verification-form-address {
   display: grid;
   row-gap: 0.5rem;
+}
+
+.new-advance-conf-tickbox {
+  margin-top: 1rem;
+}
+
+.full-container-width-button button {
+  width: 100%;
 }

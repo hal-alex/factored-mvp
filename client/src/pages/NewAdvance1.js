@@ -50,88 +50,86 @@ const NewAdvance1 = () => {
     }
 
     return (
-        <div className="dashboard-div">
-            <h4>New Advance - Property Details</h4>
-            <form className="dashboard-div">
-                <label> Name of Advance
-                    <input
-                        type="text"
-                        name="advanceName"
-                        value={advanceName}
-                        onChange={handleChange}
-                        required
-                    />
-                </label>
-                <label> Description of Advance
-                    <input
-                        type="text"
-                        name="advanceDescription"
-                        value={advanceDescription}
-                        onChange={handleChange}
-                        required
-                    />
-                </label>
-                <label> Reason for Advance
-                    <input
-                        type="text"
-                        name="reasonForAdvance"
-                        value={reasonForAdvance}
-                        onChange={handleChange}
-                        required
-                    />
-                </label>
-                <label> Property Address the Advance is for
-                    <input
-                        type="text"
-                        name="firstLine"
-                        value={firstLine}
-                        placeholder="First Line"
-                        onChange={handleChange}
-                        required
-                    />
-                    <input
-                        type="text"
-                        name="secondLine"
-                        value={secondLine}
-                        placeholder="Second Line"
-                        onChange={handleChange}
-                        required
-                    />
-                    <input
-                        type="text"
-                        name="postcode"
-                        value={postcode}
-                        placeholder="Post code"
-                        onChange={handleChange}
-                        required
-                    />
-                    <input
-                        type="text"
-                        name="townOrCity"
-                        value={townOrCity}
-                        placeholder="Town/city"
-                        onChange={handleChange}
-                        required
-                    />
-                    <input
-                        type="text"
-                        name="country"
-                        value={country}
-                        placeholder="Country"
-                        onChange={handleChange}
-                        required
-                    />
-                </label>
-                <label> Monthly rent for this property
-                    <input
-                        type="number"
-                        name="monthlyRent"
-                        value={monthlyRent}
-                        onChange={handleChange}
-                        required
-                    />
-                </label>
-                <button onClick={handleSubmit}>Next stage</button>
+        <div className="generic-container">
+            <h2>New Advance - Property Details</h2>
+            <form className="address-verification-form">
+                <label>Name of Advance</label>
+                <input
+                    type="text"
+                    name="advanceName"
+                    value={advanceName}
+                    onChange={handleChange}
+                    required
+                />
+                <label>Description of Advance</label>
+                <input
+                    type="text"
+                    name="advanceDescription"
+                    value={advanceDescription}
+                    onChange={handleChange}
+                    required
+                />
+                <label> Reason for Advance</label>
+                <input
+                    type="text"
+                    name="reasonForAdvance"
+                    value={reasonForAdvance}
+                    onChange={handleChange}
+                    required
+                />
+                <label> Property Address the Advance </label>
+                <input
+                    type="text"
+                    name="firstLine"
+                    value={firstLine}
+                    placeholder="First Line"
+                    onChange={handleChange}
+                    required
+                />
+                <input
+                    type="text"
+                    name="secondLine"
+                    value={secondLine}
+                    placeholder="Second Line"
+                    onChange={handleChange}
+                    required
+                />
+                <input
+                    type="text"
+                    name="postcode"
+                    value={postcode}
+                    placeholder="Post code"
+                    onChange={handleChange}
+                    required
+                />
+                <input
+                    type="text"
+                    name="townOrCity"
+                    value={townOrCity}
+                    placeholder="Town/city"
+                    onChange={handleChange}
+                    required
+                />
+                <input
+                    type="text"
+                    name="country"
+                    value={country}
+                    placeholder="Country"
+                    onChange={handleChange}
+                    required
+                />
+                <label>Monthly rent for this property (£)</label>
+                <input
+                    type="number"
+                    name="monthlyRent"
+                    value={monthlyRent}
+                    onChange={handleChange}
+                    required
+                />
+                <button className="btn-secondary"
+                    onClick={handleSubmit}>
+                    {`Next stage >`}
+                </button>
                 <p>{errorText && "All fields are required"}</p>
             </form>
         </div>

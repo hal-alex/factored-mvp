@@ -85,38 +85,40 @@ const NewAdvance3 = () => {
     }
 
     return (
-        <div className="dashboard-div">
-            <h4>New Advance - Rent & Advance Details</h4>
-            <form className="dashboard-div">
-                <label>
-                    Amount of annual rent you're selling in £
-                    <input
-                        type="number"
-                        name="amountRentSelling"
-                        value={amountRentSelling}
-                        onChange={handleChange}
-                    />
-                </label>
-                <p>Your min Advance amount is £3000 </p>
-                <p>Your max Advance amount is £{monthlyRent * 12}</p>
-                <label>
-                    Duration of Advance in months
-                    <input
-                        type="number"
-                        name="advanceDuration"
-                        value={advanceDuration}
-                        onChange={handleChange}
-                        placeholder="60"
-                    />
-                </label>
-                <p>Between 12 months and 60 months</p>
-                <label>
-                    <p>Your monthly payments will be: £{monthlyPayment}</p>
-                    <p>Your APR is {yearlyInterestRate}%</p>
-                </label>
-                <button onClick={handleSubmit}>Next stage</button>
-                <button onClick={() =>
-                    navigate("/new-advance-2")}>Previous stage</button>
+        <div className="generic-container">
+            <h2>New Advance - Rent & Advance Details</h2>
+            <form className="address-verification-form">
+                <label>Amount of annual rent you're selling in £</label>
+                <input
+                    type="number"
+                    name="amountRentSelling"
+                    value={amountRentSelling}
+                    onChange={handleChange}
+                />
+                <label>Your min Advance amount is £3000 </label>
+                <label>Your max Advance amount is £{monthlyRent * 12}</label>
+                <label>Duration of Advance in months</label>
+                <input
+                    type="number"
+                    name="advanceDuration"
+                    value={advanceDuration}
+                    onChange={handleChange}
+                    placeholder="60"
+                />
+                <label>Between 12 months and 60 months</label>
+                <label>Your monthly payments will be: £{monthlyPayment}</label>
+                <label>Your APR is {yearlyInterestRate}%</label>
+                <div className="two-button-container">
+                    <button className="btn-secondary" onClick={() =>
+                        navigate("/new-advance-2")}>
+                        {`< Previous stage`}
+                    </button>
+                    <button
+                        className="btn-secondary"
+                        onClick={handleSubmit}>
+                        {`Next stage >`}
+                    </button>
+                </div>
             </form>
         </div>
     )

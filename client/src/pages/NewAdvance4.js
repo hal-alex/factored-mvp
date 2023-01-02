@@ -26,39 +26,41 @@ const NewAdvance4 = () => {
     }
 
     return (
-        <div className="dashboard-div">
-            <h4>New Advance - Your Bank Details</h4>
-            <form className="dashboard-div">
-                <label>
-                    Name on your bank account
-                    <input
-                        type="text"
-                        name="bankAccountName"
-                        value={bankAccountName}
-                        onChange={handleChange}
-                    />
-                </label>
-                <label>
-                    Bank account number
-                    <input
-                        type="number"
-                        name="bankAccountName"
-                        value={bankAccountNumber}
-                        onChange={handleChange}
-                    />
-                </label>
-                <label>
-                    Bank account sort code
-                    <input
-                        type="number"
-                        name="bankAccountSortCode"
-                        value={bankAccountSortCode}
-                        onChange={handleChange}
-                    />
-                </label>
-                <button onClick={handleSubmit}>Next stage</button>
-                <button onClick={() =>
-                    navigate("/new-advance-3")}>Previous stage</button>
+        <div className="generic-container">
+            <h2>New Advance - Your Bank Details</h2>
+            <form className="address-verification-form">
+                <label>Name on your bank account</label>
+                <input
+                    type="text"
+                    name="bankAccountName"
+                    value={bankAccountName}
+                    onChange={handleChange}
+                />
+                <label>Bank account number</label>
+                <input
+                    type="number"
+                    name="bankAccountName"
+                    value={bankAccountNumber}
+                    onChange={handleChange}
+                />
+                <label>Bank account sort code</label>
+                <input
+                    type="number"
+                    name="bankAccountSortCode"
+                    value={bankAccountSortCode}
+                    onChange={handleChange}
+                />
+                <div className="two-button-container">
+                    <button className="btn-secondary" onClick={() =>
+                        navigate("/new-advance-3")}>
+                        {`< Previous stage`}
+                    </button>
+                    <button
+                        className="btn-secondary"
+                        onClick={handleSubmit}>
+                        {`Next stage >`}
+                    </button>
+                </div>
             </form>
         </div>
     )
