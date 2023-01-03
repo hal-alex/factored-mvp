@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { useGlobalContext } from '../context'
+import axios from 'axios'
+axios.defaults.baseURL = 'http://127.0.0.1:8000'
 
 const Register = () => {
 
@@ -19,6 +21,20 @@ const Register = () => {
 
   const onlyLettersCheck = (stringValue) => {
     return /^[a-zA-Z]+$/.test(stringValue)
+  }
+
+  const API_URL = "/api/register"
+
+  const makeAPIRequest = async () => {
+    try {
+      const response = await axios.post(API_URL, {
+        email: regFormData.emailAddress,
+        password: regFormData.password,
+      })
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const handleRegisterFormSubmit = (e) => {
@@ -51,6 +67,7 @@ const Register = () => {
       setRegError("You must accept our Terms & Conditions to create an account")
     } else {
       console.log("API request made")
+      makeAPIRequest()
     }
   }
 
