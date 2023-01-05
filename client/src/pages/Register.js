@@ -29,46 +29,52 @@ const Register = () => {
     try {
       const response = await axios.post(API_URL, {
         email: regFormData.emailAddress,
+        title: regFormData.title,
+        first_name: regFormData.firstName,
+        last_name: regFormData.lastName,
         password: regFormData.password,
       })
       console.log(response)
     } catch (error) {
       console.log(error)
+      console.log(error.response.data.message)
     }
   }
 
   const handleRegisterFormSubmit = (e) => {
     e.preventDefault()
     setRegError("")
-    if (regFormData.title == "Please select") {
-      setRegError("Please select a valid title")
-    } else if (!regFormData.firstName) {
-      setRegError("First name is required")
-    } else if (!onlyLettersCheck(regFormData.firstName)) {
-      setRegError("First name must be valid (only letters)")
-    } else if (!regFormData.lastName) {
-      setRegError("Last name is required")
-    } else if (!onlyLettersCheck(regFormData.lastName)) {
-      setRegError("Last name must be valid (only letters)")
-    } else if (!regFormData.emailAddress) {
-      setRegError("Email address is required")
-    } else if (!regFormData.emailAddress.includes("@") ||
-      !regFormData.emailAddress.includes(".")) {
-      setRegError("Email address is must be valid")
-    } else if (!regFormData.password) {
-      setRegError("Password is required")
-    } else if (regFormData.password.length < 8) {
-      setRegError("Password needs to be at least 8 characters long")
-    } else if (regFormData.password === regFormData.password.toLowerCase()) {
-      setRegError("Password need to have at least one upper case letter")
-    } else if (!/\d/g.test(regFormData.password)) {
-      setRegError("Password needs to have at least one number")
-    } else if (!regFormData.acceptTermsConditions) {
-      setRegError("You must accept our Terms & Conditions to create an account")
-    } else {
-      console.log("API request made")
-      makeAPIRequest()
-    }
+    // if (regFormData.title == "Please select") {
+    //   setRegError("Please select a valid title")
+    // } else if (!regFormData.firstName) {
+    //   setRegError("First name is required")
+    // } else if (!onlyLettersCheck(regFormData.firstName)) {
+    //   setRegError("First name must be valid (only letters)")
+    // } else if (!regFormData.lastName) {
+    //   setRegError("Last name is required")
+    // } else if (!onlyLettersCheck(regFormData.lastName)) {
+    //   setRegError("Last name must be valid (only letters)")
+    // } else if (!regFormData.emailAddress) {
+    //   setRegError("Email address is required")
+    // } else if (!regFormData.emailAddress.includes("@") ||
+    //   !regFormData.emailAddress.includes(".")) {
+    //   setRegError("Email address is must be valid")
+    // } else if (!regFormData.password) {
+    //   setRegError("Password is required")
+    // } else if (regFormData.password.length < 8) {
+    //   setRegError("Password needs to be at least 8 characters long")
+    // } else if (regFormData.password === regFormData.password.toLowerCase()) {
+    //   setRegError("Password need to have at least one upper case letter")
+    // } else if (!/\d/g.test(regFormData.password)) {
+    //   setRegError("Password needs to have at least one number")
+    // } else if (!regFormData.acceptTermsConditions) {
+    //   setRegError("You must accept our Terms & Conditions to create an account")
+    // } 
+
+
+    console.log("API request made")
+    makeAPIRequest()
+
   }
 
   const handleChange = (e) => {
