@@ -1,13 +1,18 @@
 import { useState } from 'react'
 import { useGlobalContext } from '../context'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+
 axios.defaults.baseURL = 'http://127.0.0.1:8000'
 
 const Register = () => {
 
+  const navigate = useNavigate()
+
   const { passwordShow, setPasswordShow } = useGlobalContext()
 
   const [regError, setRegError] = useState("")
+  const [formMessage, setFormMessage] = useState("")
   const [regFormData, setRegFormData] = useState({
     title: "Please select",
     firstName: "",
@@ -25,7 +30,7 @@ const Register = () => {
 
   const API_URL = "/api/register"
 
-  const makeAPIRequest = async () => {
+  const MakeAPIRequest = async () => {
     try {
       const response = await axios.post(API_URL, {
         email: regFormData.emailAddress,
@@ -35,46 +40,48 @@ const Register = () => {
         password: regFormData.password,
       })
       console.log(response)
+      setRegError("")
+      setFormMessage("Account created successfully!")
+      setTimeout(() => {
+        navigate("/login")
+      }, 3000)
     } catch (error) {
       console.log(error)
-      console.log(error.response.data.message)
+      setRegError(error.message)
     }
   }
 
   const handleRegisterFormSubmit = (e) => {
     e.preventDefault()
     setRegError("")
-    // if (regFormData.title == "Please select") {
-    //   setRegError("Please select a valid title")
-    // } else if (!regFormData.firstName) {
-    //   setRegError("First name is required")
-    // } else if (!onlyLettersCheck(regFormData.firstName)) {
-    //   setRegError("First name must be valid (only letters)")
-    // } else if (!regFormData.lastName) {
-    //   setRegError("Last name is required")
-    // } else if (!onlyLettersCheck(regFormData.lastName)) {
-    //   setRegError("Last name must be valid (only letters)")
-    // } else if (!regFormData.emailAddress) {
-    //   setRegError("Email address is required")
-    // } else if (!regFormData.emailAddress.includes("@") ||
-    //   !regFormData.emailAddress.includes(".")) {
-    //   setRegError("Email address is must be valid")
-    // } else if (!regFormData.password) {
-    //   setRegError("Password is required")
-    // } else if (regFormData.password.length < 8) {
-    //   setRegError("Password needs to be at least 8 characters long")
-    // } else if (regFormData.password === regFormData.password.toLowerCase()) {
-    //   setRegError("Password need to have at least one upper case letter")
-    // } else if (!/\d/g.test(regFormData.password)) {
-    //   setRegError("Password needs to have at least one number")
-    // } else if (!regFormData.acceptTermsConditions) {
-    //   setRegError("You must accept our Terms & Conditions to create an account")
-    // } 
-
-
+    if (regFormData.title == "Please select") {
+      return setRegError("Please select a valid title")
+    } else if (!regFormData.firstName) {
+      return setRegError("First name is required")
+    } else if (!onlyLettersCheck(regFormData.firstName)) {
+      return setRegError("First name must be valid (only letters)")
+    } else if (!regFormData.lastName) {
+      return setRegError("Last name is required")
+    } else if (!onlyLettersCheck(regFormData.lastName)) {
+      return setRegError("Last name must be valid (only letters)")
+    } else if (!regFormData.emailAddress) {
+      return setRegError("Email address is required")
+    } else if (!regFormData.emailAddress.includes("@") ||
+      !regFormData.emailAddress.includes(".")) {
+      return setRegError("Email address is must be valid")
+    } else if (!regFormData.password) {
+      return setRegError("Password is required")
+    } else if (regFormData.password.length < 8) {
+      return setRegError("Password needs to be at least 8 characters long")
+    } else if (regFormData.password === regFormData.password.toLowerCase()) {
+      return setRegError("Password need to have at least one upper case letter")
+    } else if (!/\d/g.test(regFormData.password)) {
+      return setRegError("Password needs to have at least one number")
+    } else if (!regFormData.acceptTermsConditions) {
+      return setRegError("You must accept our Terms & Conditions to create an account")
+    }
     console.log("API request made")
-    makeAPIRequest()
-
+    MakeAPIRequest()
   }
 
   const handleChange = (e) => {
@@ -137,6 +144,7 @@ const Register = () => {
         <label>I accept Factored's Terms & Conditions and Privacy Policy</label>
       </div>
       {regError ? <p className="form-error-text">{regError}</p> : ""}
+      {formMessage ? <p className="form-success-text">{formMessage}</p> : ""}
       <button
         className="btn-secondary"
         onClick={handleRegisterFormSubmit}

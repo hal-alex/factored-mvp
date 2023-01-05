@@ -205,6 +205,11 @@ code {
   font-weight: 500;
 }
 
+.form-success-text {
+  color: green;
+  font-weight: 500;
+}
+
 .auth-form-password-widget {
   text-decoration: underline;
 }
