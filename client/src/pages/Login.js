@@ -27,7 +27,7 @@ const Login = () => {
       const response = await axios.post(API_URL, {
         email: loginFormData.emailAddress,
         password: loginFormData.password,
-      }, { withCredentials: true })
+      })
       console.log(response)
       setLoginFormError("")
       setFormMessage("Logged in successfully!")
