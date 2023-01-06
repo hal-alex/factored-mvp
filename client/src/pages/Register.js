@@ -30,7 +30,7 @@ const Register = () => {
 
   const API_URL = "/api/register"
 
-  const MakeAPIRequest = async () => {
+  const makeAPIRequest = async () => {
     try {
       const response = await axios.post(API_URL, {
         email: regFormData.emailAddress,
@@ -81,7 +81,7 @@ const Register = () => {
       return setRegError("You must accept our Terms & Conditions to create an account")
     }
     console.log("API request made")
-    MakeAPIRequest()
+    makeAPIRequest()
   }
 
   const handleChange = (e) => {

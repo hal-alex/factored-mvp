@@ -1,34 +1,65 @@
 import React, { useState } from 'react'
 import { useGlobalContext } from '../context'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+
+axios.defaults.baseURL = 'http://127.0.0.1:8000'
+
+
 const Login = () => {
+
+  const navigate = useNavigate()
 
   const { passwordShow, setPasswordShow } = useGlobalContext()
 
   const [loginFormError, setLoginFormError] = useState("")
+  const [formMessage, setFormMessage] = useState("")
   const [loginFormData, setLoginFormData] = useState({
     emailAddress: "",
     password: "",
   })
 
+  const API_URL = "/api/login"
+
+  const makeAPIRequest = async () => {
+    try {
+      const response = await axios.post(API_URL, {
+        email: loginFormData.emailAddress,
+        password: loginFormData.password,
+      }, { withCredentials: true })
+      console.log(response)
+      setLoginFormError("")
+      setFormMessage("Logged in successfully!")
+      window.localStorage.setItem("token", response.data.token)
+      setTimeout(() => {
+        navigate("/dashboard")
+      }, 3000)
+    } catch (error) {
+      console.log(error)
+      setLoginFormError(error.message)
+    }
+  }
+
   const handleLoginFormSubmit = (e) => {
     e.preventDefault()
     setLoginFormError("")
     if (!loginFormData.emailAddress) {
-      setLoginFormError("Email address is required")
+      return setLoginFormError("Email address is required")
     } else if (!loginFormData.emailAddress.includes("@") ||
       !loginFormData.emailAddress.includes(".")) {
-      setLoginFormError("Email address is must be valid")
+      return setLoginFormError("Email address is must be valid")
     } else if (!loginFormData.password) {
-      setLoginFormError("Password is required")
+      return setLoginFormError("Password is required")
     } else if (loginFormData.password.length < 8) {
-      setLoginFormError("Password needs to be at least 8 characters long")
+      return setLoginFormError("Password needs to be at least 8 characters long")
     } else if (loginFormData.password === loginFormData.password.toLowerCase()) {
-      setLoginFormError("Password need to have at least one upper case letter")
+      return setLoginFormError("Password need to have at least one upper case letter")
     } else if (!/\d/g.test(loginFormData.password)) {
-      setLoginFormError("Password needs to have at least one number")
+      return setLoginFormError("Password needs to have at least one number")
     } else {
       console.log("API request made")
+      makeAPIRequest()
     }
   }
 
@@ -59,6 +90,7 @@ const Login = () => {
         setPasswordShow(!passwordShow)}>
         {passwordShow ? "hide password" : "show password"}</p>
       {loginFormError ? <p className="form-error-text">{loginFormError}</p> : ""}
+      {formMessage ? <p className="form-success-text">{formMessage}</p> : ""}
       <Link to="/forgotpassword">Forgot password?</Link>
       <button
         className="btn-secondary"
