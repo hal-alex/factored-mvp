@@ -1,14 +1,21 @@
 import React from 'react'
 import { NavLink } from "react-router-dom"
 import LOGO from "../assets/factored_logo.png"
-import { isAuthenticated, handleLogout } from "../auth/auth"
+import { isAuthenticated } from "../auth/auth"
 import { useEffect, useLocation } from 'react'
+import { useNavigate } from "react-router-dom"
 
 const Navbar = () => {
 
-  const location = useLocation()
+  // const location = useLocation()
+  const navigate = useNavigate()
 
-  useEffect(() => { }, [location.pathname])
+  const handleLogout = () => {
+    window.localStorage.removeItem("token")
+    navigate("/")
+  }
+
+  // useEffect(() => { }, [location.pathname])
 
   return (
     <header className="main-header">
