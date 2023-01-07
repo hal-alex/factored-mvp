@@ -1,5 +1,4 @@
-import Buffer from ""
-import { useNavigate } from "react-router-dom"
+import Buffer from "buffer"
 
 export const getLocalToken = () => {
     window.localStorage.getItem("token")
@@ -24,10 +23,3 @@ export const isAuthenticated = () => {
     return currentTime < userPayload.exp
 }
 
-export const handleLogout = () => {
-
-    const navigate = useNavigate()
-
-    window.localStorage.removeItem("token")
-    navigate("/")
-}
