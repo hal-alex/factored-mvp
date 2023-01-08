@@ -2,8 +2,8 @@ import React from 'react'
 import { NavLink } from "react-router-dom"
 import LOGO from "../assets/factored_logo.png"
 import { isAuthenticated } from "../auth/auth"
-import { useEffect, useLocation } from 'react'
-import { useNavigate } from "react-router-dom"
+import { useEffect, } from 'react'
+import { useNavigate, useLocation } from "react-router-dom"
 
 const Navbar = () => {
 
@@ -32,7 +32,8 @@ const Navbar = () => {
           <li className="main-navbar__item"><NavLink to="/dashboard">Dashboard</NavLink></li>
           <li className="main-navbar__item"><NavLink to="/profile">Profile</NavLink></li>
           {isAuthenticated() ?
-            <p onClick={handleLogout}>Log out</p>
+            <li onClick={handleLogout} className="main-navbar__item">
+              <NavLink to="/">Log Out</NavLink></li>
             :
             <>
               <li className="main-navbar__item"><NavLink to="/register">Register</NavLink></li>
