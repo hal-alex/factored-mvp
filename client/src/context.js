@@ -19,6 +19,7 @@ const getAdvanceLocalStorage = () => {
     }
 }
 
+
 const getLocalAdvanceStorage = () => {
     let localNewAdvance = localStorage.getItem('localNewAdvance')
     if (localNewAdvance) {
