@@ -28,7 +28,7 @@ const Register = () => {
     return /^[a-zA-Z]+$/.test(stringValue)
   }
 
-  const API_URL = "/api/register"
+  const API_URL = "/api/user/create/"
 
   const makeAPIRequest = async () => {
     try {
