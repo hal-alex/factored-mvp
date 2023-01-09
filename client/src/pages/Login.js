@@ -20,7 +20,7 @@ const Login = () => {
     password: "",
   })
 
-  const API_URL = "/api/login"
+  const API_URL = "/api/user/token/"
 
   const makeAPIRequest = async () => {
     try {
