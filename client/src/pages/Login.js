@@ -31,7 +31,7 @@ const Login = () => {
       console.log(response)
       setLoginFormError("")
       setFormMessage("Logged in successfully!")
-      window.localStorage.setItem("token", response.data.token)
+      window.localStorage.setItem("factored_token", response.data.token)
       setTimeout(() => {
         navigate("/dashboard")
       }, 3000)

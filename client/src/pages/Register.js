@@ -3,7 +3,6 @@ import { useGlobalContext } from '../context'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
-axios.defaults.baseURL = 'http://127.0.0.1:8000'
 
 const Register = () => {
 
