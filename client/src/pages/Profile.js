@@ -1,18 +1,33 @@
 import React, { useState } from 'react'
 import { useGlobalContext } from '../context'
 import { useNavigate } from 'react-router-dom'
+import axios from "axios"
 
 const ProfilePage = () => {
 
   const navigate = useNavigate()
 
-  const { userProfileTestData, setUserProfileTestData } = useGlobalContext()
+  const {  } = useGlobalContext()
   const [showForm, setShowForm] = useState(false)
   const [newNumber, setNewNumber] = useState("")
 
+  const getUserProfile = async () => {
+    try {
+      const response = await axios.get("", {
+
+      })
+      console.log(response)
+      window.localStorage.setItem("token", response.data.token)
+      setTimeout(() => {
+        navigate("/dashboard")
+      }, 3000)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const handleProfileFormChange = (e) => {
     e.preventDefault()
-    setUserProfileTestData({ ...userProfileTestData, "contactNumber": newNumber })
     setShowForm(false)
   }
 
@@ -22,7 +37,7 @@ const ProfilePage = () => {
 
   return (
     <div className="profile-container">
-      <h2>Your Profile</h2>
+      {/* <h2>Your Profile</h2>
       <p className="profile-title">Title: {userProfileTestData.title}</p>
       <p className="profile-title">First name: {userProfileTestData.firstName}</p>
       <p className="profile-title">Last name: {userProfileTestData.lastName}</p>
@@ -54,7 +69,7 @@ const ProfilePage = () => {
       <button
         className="btn-secondary"
         onClick={() => navigate("/dashboard")}>
-        Back to dashboard</button>
+        Back to dashboard</button> */}
     </div>
   )
 }

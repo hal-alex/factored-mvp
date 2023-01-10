@@ -68,7 +68,7 @@ const Dashboard = () => {
               return <div className="table-heading" key={index}>{heading}</div>
             })}
 
-            {testAdvances.map(advance => {
+            {/* {testAdvances.map(advance => {
               const {
                 id,
                 firstLine,
@@ -95,7 +95,7 @@ const Dashboard = () => {
                   <div>{nextPaymentDate}</div>
                 </>
               )
-            })}
+            })} */}
           </div>
         </div>
       </div>
