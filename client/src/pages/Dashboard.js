@@ -1,14 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useGlobalContext } from '../context'
+import axios from 'axios'
 
 const Dashboard = () => {
 
-  const { userProfileTestData, testAdvances } = useGlobalContext()
+  const { userDetails, setUserDetails } = useGlobalContext()
 
-  const KYC = userProfileTestData.ifVerified
-  const phoneNumber = userProfileTestData.contactNumber
-  const addressHistoryStatus = userProfileTestData.hasAddressHistory
+  const getUserProfile = async () => {
+    try {
+      const response = await axios.get("api/user/me/", {
+      })
+      console.log(response)
+      setUserDetails(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    getUserProfile()
+  }, [])
+
+
 
   const dashboardHeadings = [
     "Advance ID",
@@ -30,32 +44,34 @@ const Dashboard = () => {
           <h4>Complete these steps to create your first advance</h4>
           <div>
             <p>1. Go through identity verification.</p>
-            {KYC && <p>Completed</p>}
+            {userDetails.is_identity_verified && <p>Completed</p>}
             <Link to="/identityverification">
               <button className="btn-secondary"
-                disabled={KYC ? true : false}>
+                disabled={userDetails.is_identity_verified ? true : false}>
                 Start Identity Verification</button>
             </Link>
           </div>
           <p>2. Add your address history for the last 3 years</p>
-          <p>{addressHistoryStatus ? "Completed" : ""}</p>
+          <p>{userDetails.has_address_history ? "Completed" : ""}</p>
           <Link to="/addresshistory">
             <button className="btn-secondary"
-              disabled={addressHistoryStatus ? true : false}>Add Address History</button>
+              disabled={userDetails.has_address_history ?
+                true : false}>Add Address History</button>
           </Link>
           <div>
             <p>3. Add your contact number</p>
-            <p>{phoneNumber ? "Completed" : ""}</p>
+            <p>{userDetails.mobile_number ? "Completed" : ""}</p>
             <Link to="/profile">
               <button className="btn-secondary"
-                disabled={phoneNumber ? true : false}>Add Contact Number</button>
+                disabled={userDetails.mobile_number ?
+                  true : false}>Add Contact Number</button>
             </Link>
           </div>
         </div>
         <div className='create-advance-button'>
           <Link to="/new-advance-1">
-            <button className="btn-primary" disabled={KYC && addressHistoryStatus
-              && phoneNumber ? false : true}>Create Advance</button>
+            {/* <button className="btn-primary" disabled={KYC && addressHistoryStatus
+              && phoneNumber ? false : true}>Create Advance</button> */}
           </Link>
         </div>
       </div>
